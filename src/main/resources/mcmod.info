@@ -1,0 +1,16 @@
+[
+{
+  "modid": "craftastrophe",
+  "name": "Craftastrophe",
+  "description": "Explore a ruined civilization to put together the knowledge to rebuild an industrial society.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/barrowisp/craftastrophe",
+  "updateUrl": "",
+  "authorList": ["barrowisp & yooski"],
+  "credits": "Forge and ModDevCafe team",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
