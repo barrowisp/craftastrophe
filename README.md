@@ -1,2 +1,2 @@
 # craftastrophe
-Explore a ruined civilization to put together the knowledge to rebuild an industrial society
+Explore the ruins of civilization to compile the knowledge necessary to rebuild an industrialized society.
