@@ -1,5 +1,7 @@
 package io.barrowisp.craftastrophe;
 
+import io.barrowisp.craftastrophe.items.ModItem;
+import net.minecraft.init.Items;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -35,6 +37,7 @@ public class Craftastrophe {
     {
         logger = event.getModLog();
         logger.info("Pre-initializing " + Craftastrophe.MODID + "...");
+        ModItem.init();
     }
 
     @Mod.EventHandler
