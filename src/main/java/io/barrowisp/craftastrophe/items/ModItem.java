@@ -5,6 +5,8 @@ import org.jetbrains.annotations.Contract;
 
 public enum ModItem {
 
+    BLUEPRINT(new Blueprint("blueprint"));
+
     private static java.util.List<Item> ITEMS = new java.util.ArrayList<>();
     private ItemBase instance;
 
