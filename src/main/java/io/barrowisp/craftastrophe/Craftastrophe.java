@@ -8,6 +8,9 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = Craftastrophe.MODID, name = Craftastrophe.NAME, version = Craftastrophe.VERSION)
 public class Craftastrophe {
 
+    @Mod.Instance
+    public static Craftastrophe instance;
+
     public static final String MODID = "craftastrophe";
     public static final String NAME = "Craftastrophe";
     public static final String VERSION = "0.1";
