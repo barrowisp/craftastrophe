@@ -16,6 +16,19 @@ public class Craftastrophe {
     public static final String VERSION = "0.1";
 
     private static Logger logger;
+    /**
+     *  Create a new creative tab to be displayed in-game for our mod.
+     *  By overriding {@code getTabIconItem} we are able to return our own
+     *  item stack which the game will use to show a tab picture.
+     */
+    public static final net.minecraft.creativetab.CreativeTabs tabCraftastrophe =
+            (new net.minecraft.creativetab.CreativeTabs("tabCraftastrophe") {
+
+        @Override
+        public  net.minecraft.item.ItemStack getTabIconItem() {
+            return new  net.minecraft.item.ItemStack(Items.WRITABLE_BOOK);
+        }
+    });
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
