@@ -3,7 +3,6 @@ package io.barrowisp.craftastrophe;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Craftastrophe.MODID, name = Craftastrophe.NAME, version = Craftastrophe.VERSION)
 public class Craftastrophe {
@@ -15,7 +14,8 @@ public class Craftastrophe {
     public static final String NAME = "Craftastrophe";
     public static final String VERSION = "0.1";
 
-    private static Logger logger;
+    public static org.apache.logging.log4j.Logger logger;
+
     /**
      *  Create a new creative tab to be displayed in-game for our mod.
      *  By overriding {@code getTabIconItem} we are able to return our own
