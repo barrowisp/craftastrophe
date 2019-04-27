@@ -16,7 +16,7 @@ public class Craftastrophe {
     public static final String NAME = "Craftastrophe";
     public static final String VERSION = "0.1";
 
-    public static org.apache.logging.log4j.Logger logger;
+    public static org.apache.logging.log4j.Logger LOGGER;
 
     /**
      *  Create a new creative tab to be displayed in-game for our mod.
@@ -35,14 +35,15 @@ public class Craftastrophe {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        logger = event.getModLog();
-        logger.info("Pre-initializing " + Craftastrophe.MODID + "...");
+        LOGGER = event.getModLog();
+        LOGGER.info("Pre-initializing " + Craftastrophe.MODID + "...");
+
         ModItem.init();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        logger.info("Initializing " + Craftastrophe.MODID + "...");
+        LOGGER.info("Initializing " + Craftastrophe.MODID + "...");
     }
 }
