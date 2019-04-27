@@ -55,6 +55,8 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
+    // Jetbrains IntelliJ annotations
+    compile 'org.jetbrains:annotations:16.0.2'
 }
 
 processResources {
