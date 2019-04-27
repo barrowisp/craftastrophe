@@ -8,7 +8,7 @@ public enum ModItem {
     BLUEPRINT(new Blueprint("blueprint"));
 
     private static java.util.List<Item> ITEMS = new java.util.ArrayList<>();
-    private ItemBase instance;
+    private final ItemBase instance;
 
     ModItem(ItemBase item) {
         instance = item;
