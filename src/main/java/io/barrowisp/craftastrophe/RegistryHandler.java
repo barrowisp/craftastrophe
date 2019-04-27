@@ -18,7 +18,7 @@ public class RegistryHandler {
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        Craftastrophe.LOGGER.info("Registering mod items...");
+        ModLogger.info("Registering mod items...");
         final IForgeRegistry<Item> registry = event.getRegistry();
         for (ModItem item : ModItem.values())
             registry.register(item.get());
@@ -28,7 +28,7 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event)
     {
-        Craftastrophe.LOGGER.info("Registering asset models...");
+        ModLogger.info("Registering asset models...");
         for (ModItem item : ModItem.values())
             registerModel(item.get());
     }

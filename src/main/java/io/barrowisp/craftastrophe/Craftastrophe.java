@@ -16,8 +16,6 @@ public class Craftastrophe {
     public static final String NAME = "Craftastrophe";
     public static final String VERSION = "0.1";
 
-    public static org.apache.logging.log4j.Logger LOGGER;
-
     /**
      *  Create a new creative tab to be displayed in-game for our mod.
      *  By overriding {@code getTabIconItem} we are able to return our own
@@ -35,8 +33,8 @@ public class Craftastrophe {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        LOGGER = event.getModLog();
-        LOGGER.info("Pre-initializing " + Craftastrophe.MODID + "...");
+        ModLogger.init(event.getModLog());
+        ModLogger.info("Pre-initializing " + Craftastrophe.MODID + "...");
 
         ModItem.init();
     }
@@ -44,6 +42,6 @@ public class Craftastrophe {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        LOGGER.info("Initializing " + Craftastrophe.MODID + "...");
+        ModLogger.info("Initializing " + Craftastrophe.MODID + "...");
     }
 }
