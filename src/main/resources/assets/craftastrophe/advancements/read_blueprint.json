@@ -1,0 +1,13 @@
+{
+  "criteria": {
+    "read_blueprint": {
+      "trigger": "craftastrophe:read_blueprint",
+      "conditions": {
+        "knowledge": 2
+      }
+    }
+  },
+  "rewards": {
+    "recipes": ["minecraft:redstone", "minecraft:ladder"]
+  }
+}
