@@ -7,10 +7,10 @@
   "mcversion": "${mcversion}",
   "url": "https://github.com/barrowisp/craftastrophe",
   "updateUrl": "",
-  "authorList": ["barrowisp & yooski"],
+  "authorList": ["tRead & yooski"],
   "credits": "Forge and ModDevCafe team",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": [None]
 }
 ]
