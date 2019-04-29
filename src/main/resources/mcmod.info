@@ -9,8 +9,8 @@
   "updateUrl": "",
   "authorList": ["tRead & yooski"],
   "credits": "Forge and ModDevCafe team",
-  "logoFile": "",
+  "logoFile": "assets/craftastrophe/placeholderlogo.png",
   "screenshots": [],
-  "dependencies": [None]
+  "dependencies": []
 }
 ]
