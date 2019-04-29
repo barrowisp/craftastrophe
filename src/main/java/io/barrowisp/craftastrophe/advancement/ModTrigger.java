@@ -63,6 +63,13 @@ public abstract class ModTrigger<I extends ModCriterionInstance<O>, O> implement
         listenersMap.remove(advancements);
     }
 
+    /**
+     * Activates advancement trigger and validate trigger condition.
+     * If the condition passes the test, grant the advancement reward to player.
+     *
+     * @param player instance of the player to grant the reward to
+     * @param object condition value to validate
+     */
     public void trigger(EntityPlayerMP player, O object)
     {
         ModListeners<I, O> listeners = listenersMap.get(player.getAdvancements());
@@ -72,6 +79,7 @@ public abstract class ModTrigger<I extends ModCriterionInstance<O>, O> implement
 
     /**
      * Retrieve value of defined trigger condition from {@code json} file
+     *
      * @param json entry to scan for our value
      * @return {@code null} if the condition is not defined in the {@code json} file
      */

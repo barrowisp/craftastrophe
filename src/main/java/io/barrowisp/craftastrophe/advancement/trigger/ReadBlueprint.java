@@ -36,6 +36,18 @@ public class ReadBlueprint extends ModTrigger<ReadBlueprint.Instance, Integer>
     }
 
     /**
+     * Attempt to read the blueprint and recieve advancement reward.
+     * @param player instance of the player reading the blueprint
+     * @param knowledge arbitrary value of knowledge the player possessses
+     */
+    @Override
+    public void trigger(EntityPlayerMP player, Integer knowledge)
+    {
+        ModLogger.debug("Figuring out schematics with knowledge " + knowledge);
+        super.trigger(player, knowledge);
+    }
+
+    /**
      *  Instance of our advancement critrion that holds
      *  values loaded from advancement JSON file.
      */
