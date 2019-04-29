@@ -1,2 +1,12 @@
+# Everything to the right of the equals sign = may be changed without causing errors in the game.
+# Items may be renamed as desired, and additional .lang files can be created for players who don't speak English.
+
+# While accessing the Creative inventory, the tab for this mod's items will display the name Craftastrophe.
 itemGroup.tabCraftastrophe=Craftastrophe
+
+# In the code, a Blueprint is an item which awards new recipes to the player.
+# In the world, a Blueprint item will display the name Crafting Plan.
 item.blueprint.name=Crafting Plan
+
+# Similarly, a portfolio for collecting Blueprints is currently known to the player as Documents Stash
+item.binder.name=Documents Stash
