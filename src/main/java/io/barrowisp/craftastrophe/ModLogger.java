@@ -19,6 +19,9 @@ public class ModLogger {
     private ModLogger(Logger logger) {
         LOGGER = logger;
         /*
+         * TODO: Make this an option as it displays Forge and mod debug logs
+         *       and for our purposes we only need the mod logs.
+         *
          * This will enable Log4j debug logs to be printed to console
          * in addition to the debug logfile.
          */

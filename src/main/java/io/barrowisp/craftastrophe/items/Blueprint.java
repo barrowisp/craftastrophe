@@ -22,6 +22,10 @@ public class Blueprint extends ItemBase {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ModLogger.debug("Trying to read blueprint...");
         if (playerIn instanceof EntityPlayerMP) {
+            /*
+             * TODO: Move this test variable in a dedicate field once we create
+             *       a custom player property for knowledge
+             */
             int knowledge = 1;
             ModAdvancementTriggers.readBlueprint.trigger((EntityPlayerMP) playerIn, knowledge);
          }
