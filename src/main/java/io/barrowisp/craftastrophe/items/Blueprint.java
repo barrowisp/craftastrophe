@@ -6,7 +6,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
@@ -17,8 +16,10 @@ public class Blueprint extends ItemBase {
     }
 
     /**
-     * Called when the equipped item is right clicked.
+     * Called when the player attempts to read the blueprint by right clicking in the air.<br>
+     * <i>Note that this will <b>not get called</b> if the player clicks on a block.</i>
      */
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ModLogger.debug("Trying to read blueprint...");
         if (playerIn instanceof EntityPlayerMP) {
@@ -29,6 +30,6 @@ public class Blueprint extends ItemBase {
             int knowledge = 1;
             ModAdvancementTriggers.readBlueprint.trigger((EntityPlayerMP) playerIn, knowledge);
          }
-        return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 }
