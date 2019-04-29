@@ -1,5 +1,6 @@
 package io.barrowisp.craftastrophe.advancement;
 
+import io.barrowisp.craftastrophe.ModLogger;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.advancements.PlayerAdvancements;
 
@@ -43,8 +44,13 @@ public class ModListeners<T extends ModCriterionInstance<O>, O>
             if (listener.getCriterionInstance().test(object))
                 list.add(listener);
 
-        if(!list.isEmpty())
+        if(!list.isEmpty()) {
             for (ICriterionTrigger.Listener<T> listener : list)
+            {
+                ModLogger.debug("Granting criterion to player!");
                 listener.grantCriterion(advancements);
+            }
+        }
+        else ModLogger.debug("Unable to grant criterion to player.");
     }
 }

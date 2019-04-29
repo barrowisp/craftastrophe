@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import io.barrowisp.craftastrophe.ModLogger;
 import io.barrowisp.craftastrophe.advancement.ModCriterionInstance;
 import io.barrowisp.craftastrophe.advancement.ModTrigger;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -53,19 +54,20 @@ public class ReadBlueprint extends ModTrigger<ReadBlueprint.Instance, Integer>
      */
     public static class Instance extends ModCriterionInstance<Integer>
     {
-        private final Integer threshold;
+        private final Integer requirement;
 
         public Instance(ResourceLocation id, Integer object)
         {
             super(id, object);
-            threshold = object;
-            ModLogger.debug("Initializing criterion instance: (threshold: " + threshold + ")");
+            requirement = object;
+            ModLogger.debug("Initializing criterion instance: (requirement: " + requirement + ")");
         }
 
         @Override
-        public boolean test(Integer object)
+        public boolean test(Integer knowledge)
         {
-            return object != null && object >= threshold;
+            ModLogger.debug("Testing criterion knowledge %d against requirement %d", knowledge, requirement);
+            return knowledge != null && knowledge >= requirement;
         }
     }
 }

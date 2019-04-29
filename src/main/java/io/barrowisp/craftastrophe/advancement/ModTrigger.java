@@ -86,7 +86,7 @@ public abstract class ModTrigger<I extends ModCriterionInstance<O>, O> implement
     protected String getTriggerConditionFrom(JsonObject json)
     {
         String trigger = condition != null && json.has(condition) ? JsonUtils.getString(json, condition) : null;
-        ModLogger.debug("Reading trigger condition " + json.toString() + "from json file");
+        ModLogger.debug("Reading trigger condition " + json.toString() + " from json file");
         return trigger;
     }
 }
