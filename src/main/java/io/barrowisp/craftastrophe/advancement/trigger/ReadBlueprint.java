@@ -20,18 +20,16 @@ public class ReadBlueprint extends ModTrigger<ReadBlueprint.Instance, Integer>
     @Override
     public Instance deserializeInstance(JsonObject json, JsonDeserializationContext context)
     {
-        String string = getObjectStringFromJson(json);
+        String string = getTriggerConditionFrom(json);
         if(string != null)
         {
-            int value;
             try
             {
-                value = Integer.valueOf(string);
-                return new Instance(ID, value);
+                return new Instance(ID, Integer.valueOf(string));
             }
             catch(NumberFormatException e)
             {
-                ModLogger.get().error("Value " + string + " is not a float!", e);
+                ModLogger.error("Value " + string + " is not an Integer!", e);
             }
         }
         return new Instance(ID, Integer.MAX_VALUE);
@@ -43,18 +41,19 @@ public class ReadBlueprint extends ModTrigger<ReadBlueprint.Instance, Integer>
      */
     public static class Instance extends ModCriterionInstance<Integer>
     {
-        private final Integer object;
+        private final Integer threshold;
 
         public Instance(ResourceLocation id, Integer object)
         {
             super(id, object);
-            this.object = object;
+            threshold = object;
+            ModLogger.debug("Initializing criterion instance: (threshold: " + threshold + ")");
         }
 
         @Override
         public boolean test(Integer object)
         {
-            return object != null && object < this.object;
+            return object != null && object >= threshold;
         }
     }
 }

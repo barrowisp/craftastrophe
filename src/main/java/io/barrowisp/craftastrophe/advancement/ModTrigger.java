@@ -2,21 +2,19 @@ package io.barrowisp.craftastrophe.advancement;
 
 import com.google.gson.JsonObject;
 import io.barrowisp.craftastrophe.Craftastrophe;
+import io.barrowisp.craftastrophe.ModLogger;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.HashMap;
-import java.util.Map;
 public abstract class ModTrigger<I extends ModCriterionInstance<O>, O> implements ICriterionTrigger<I>
 {
     protected final ResourceLocation ID;
-    protected final String objectName;
-    private final Map<PlayerAdvancements, ModListeners<I, O>> listenersMap = new HashMap<>();
-
-    public ModTrigger(String name, String objectName)
+    protected final String condition;
+    private final java.util.Map<PlayerAdvancements, ModListeners<I, O>>
+            listenersMap = new java.util.HashMap<>();
     /**
      * Constructs a new custom advancement trigger
      *
@@ -25,8 +23,8 @@ public abstract class ModTrigger<I extends ModCriterionInstance<O>, O> implement
      */
     public ModTrigger(String trigger, String condition)
     {
-        ID = new ResourceLocation(Craftastrophe.MODID, name);
-        this.objectName = objectName;
+        ID = new ResourceLocation(Craftastrophe.MODID, trigger);
+        this.condition = condition;
     }
 
     @Override
@@ -72,13 +70,15 @@ public abstract class ModTrigger<I extends ModCriterionInstance<O>, O> implement
             listeners.trigger(object);
     }
 
-    protected String getObjectStringFromJson(JsonObject json)
     /**
      * Retrieve value of defined trigger condition from {@code json} file
      * @param json entry to scan for our value
      * @return {@code null} if the condition is not defined in the {@code json} file
      */
+    protected String getTriggerConditionFrom(JsonObject json)
     {
-        return objectName != null && json.has(objectName) ? JsonUtils.getString(json, objectName) : null;
+        String trigger = condition != null && json.has(condition) ? JsonUtils.getString(json, condition) : null;
+        ModLogger.debug("Reading trigger condition " + json.toString() + "from json file");
+        return trigger;
     }
 }
