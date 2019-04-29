@@ -11,7 +11,7 @@ out
 *.ipr
 *.iws
 *.iml
-.idea
+.idea/*
 
 # gradle
 build
@@ -21,3 +21,6 @@ build
 classes
 eclipse
 run
+
+# exceptions
+!/.idea/runConfigurations/
