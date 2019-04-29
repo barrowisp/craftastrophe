@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Contract;
 
 /**
  *  Wrapper class for Apache Log4j logging system.
- *  Use this for all mod logging purporses.
+ *  Use this for all mod logging purposes.
  */
 public class ModLogger {
 
@@ -37,7 +37,7 @@ public class ModLogger {
         if (instance == null)
             instance = new ModLogger(logger);
         else
-            instance.LOGGER.error("Trying to initialize ModLogger more then once");
+            instance.LOGGER.error("Trying to initialize ModLogger more than once");
     }
     @Contract(pure = true)
     public static Logger get() {
@@ -54,5 +54,9 @@ public class ModLogger {
     }
     public static void error(String log, Throwable e) {
         instance.LOGGER.error(log, e);
+    }
+
+    public static void debug(String log) {
+        instance.LOGGER.debug(log);
     }
 }
