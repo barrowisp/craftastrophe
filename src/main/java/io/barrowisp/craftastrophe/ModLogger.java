@@ -28,12 +28,14 @@ public class ModLogger {
      * <ul>
      *     <li><b>STANDARD</b>: Print <i>only</i> mod debug logs to console</li>
      *     <li><b>VERBOSE</b>: Print both mod and Forge logs to console</li>
+     *     <li><b>UNKNOWN</b>: Debug mode was not recognized</li>
      * </ul>
      */
     public enum DebugMode {
 
         STANDARD("standard"),
-        VERBOSE("verbose");
+        VERBOSE("verbose"),
+        UNKNOWN("");
 
         private static DebugMode mode;
         private final String name;
@@ -48,11 +50,13 @@ public class ModLogger {
         static DebugMode findFromSysProperties(String property) {
 
             String sMode = System.getProperty(property);
+            if (sMode == null) return null;
+
             for (DebugMode eMode : DebugMode.values()) {
                 if (eMode.name.equalsIgnoreCase(sMode))
                     return eMode;
             }
-            return null;
+            return UNKNOWN;
         }
         static boolean is(DebugMode mode) {
             return DebugMode.mode == mode;
@@ -77,7 +81,8 @@ public class ModLogger {
                 logConfig.removeAppender("Console");
                 logConfig.addAppender(consoleAppender, Level.DEBUG, null);
             }
-            else logger.warn("unknown debug mode passed as VM argument");
+            else if (DebugMode.is(DebugMode.UNKNOWN))
+                logger.warn("unknown debug mode passed as VM argument");
         }
     }
     protected static void init(Logger logger) {
