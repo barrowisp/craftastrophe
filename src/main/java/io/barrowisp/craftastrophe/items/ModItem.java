@@ -5,7 +5,14 @@ import org.jetbrains.annotations.Contract;
 
 public enum ModItem {
 
-    BLUEPRINT(new Blueprint("blueprint"));
+    BLUEPRINT(new Blueprint("blueprint")),
+
+    /**
+     * Attempting to add another custom Item,
+     * as an additional 'constant' in the enum ModItem,
+     * so changed the semicolon ; at the end of the BLUEPRINT constant to a comma ,
+     */
+    BINDER(new Binder("binder"));
 
     private static java.util.List<Item> ITEMS = new java.util.ArrayList<>();
     private final ItemBase instance;
