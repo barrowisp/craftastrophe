@@ -27,7 +27,7 @@ public class Blueprint extends ItemBase {
              * TODO: Move this test variable in a dedicate field once we create
              *       a custom player property for knowledge
              */
-            int knowledge = 1;
+            int knowledge = 3;
             ModAdvancementTriggers.readBlueprint.trigger((EntityPlayerMP) playerIn, knowledge);
          }
         return super.onItemRightClick(worldIn, playerIn, handIn);
