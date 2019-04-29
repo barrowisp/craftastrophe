@@ -10,10 +10,6 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
 import java.util.Map;
-
-/**
- * Created by Mark on 07/03/2018.
- */
 public abstract class ModTrigger<I extends ModCriterionInstance<O>, O> implements ICriterionTrigger<I>
 {
     protected final ResourceLocation ID;
@@ -21,6 +17,13 @@ public abstract class ModTrigger<I extends ModCriterionInstance<O>, O> implement
     private final Map<PlayerAdvancements, ModListeners<I, O>> listenersMap = new HashMap<>();
 
     public ModTrigger(String name, String objectName)
+    /**
+     * Constructs a new custom advancement trigger
+     *
+     * @param trigger name of the custom trigger defined in the {@code json} file
+     * @param condition name of the trigger condition entry defined in the {@code json} file
+     */
+    public ModTrigger(String trigger, String condition)
     {
         ID = new ResourceLocation(Craftastrophe.MODID, name);
         this.objectName = objectName;
@@ -70,6 +73,11 @@ public abstract class ModTrigger<I extends ModCriterionInstance<O>, O> implement
     }
 
     protected String getObjectStringFromJson(JsonObject json)
+    /**
+     * Retrieve value of defined trigger condition from {@code json} file
+     * @param json entry to scan for our value
+     * @return {@code null} if the condition is not defined in the {@code json} file
+     */
     {
         return objectName != null && json.has(objectName) ? JsonUtils.getString(json, objectName) : null;
     }

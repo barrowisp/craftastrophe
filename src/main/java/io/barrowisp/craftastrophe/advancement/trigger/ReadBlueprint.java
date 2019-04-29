@@ -8,7 +8,7 @@ import io.barrowisp.craftastrophe.advancement.ModTrigger;
 import net.minecraft.util.ResourceLocation;
 
 /**
- * Created by Mark on 07/03/2018.
+ * Custom advancement trigger that fires when we read a blueprint.
  */
 public class ReadBlueprint extends ModTrigger<ReadBlueprint.Instance, Integer>
 {
@@ -37,6 +37,10 @@ public class ReadBlueprint extends ModTrigger<ReadBlueprint.Instance, Integer>
         return new Instance(ID, Integer.MAX_VALUE);
     }
 
+    /**
+     *  Instance of our advancement critrion that holds
+     *  values loaded from advancement JSON file.
+     */
     public static class Instance extends ModCriterionInstance<Integer>
     {
         private final Integer object;

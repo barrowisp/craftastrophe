@@ -4,7 +4,7 @@ import io.barrowisp.craftastrophe.advancement.trigger.ReadBlueprint;
 import net.minecraft.advancements.CriteriaTriggers;
 
 /**
- * Created by Mark on 07/03/2018.
+ * This class handles initialization and registration of custom advancement triggers.
  */
 public class ModAdvancementTriggers
 {
