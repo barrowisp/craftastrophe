@@ -6,57 +6,113 @@ import org.apache.logging.log4j.core.Appender;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.config.LoggerConfig;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 
 /**
- *  Wrapper class for Apache Log4j logging system.
- *  Use this for all mod logging purposes.
+ * Wrapper class for Apache Log4j logging system.
+ * Use this for all mod logging purposes.<br>
+ *
+ * <i>Note that this class cannot be instantialized from outside,
+ * use {@link #init(Logger)} instead.</i>
+ *
+ * @see io.barrowisp.craftastrophe.ModLogger.DebugMode
  */
+@Nullable
 public class ModLogger {
 
     private static ModLogger instance;
-    private Logger LOGGER;
+    private Logger logger;
 
-    private ModLogger(Logger logger) {
-        LOGGER = logger;
-        /*
-         * TODO: Make this an option as it displays Forge and mod debug logs
-         *       and for our purposes we only need the mod logs.
-         *
-         * This will enable Log4j debug logs to be printed to console
-         * in addition to the debug logfile.
-         */
-        if (Boolean.getBoolean("debug.mode")) {
-            LoggerContext context = ((org.apache.logging.log4j.core.Logger) LOGGER).getContext();
-            LoggerConfig logConfig = context.getConfiguration().getRootLogger();
-            Appender consoleAppender = logConfig.getAppenders().get("Console");
-            logConfig.removeAppender("Console");
-            logConfig.addAppender(consoleAppender, Level.DEBUG, null);
+    /**
+     * A data type representing which debug mode our session is using.
+     * <ul>
+     *     <li><b>STANDARD</b>: Print <i>only</i> mod debug logs to console</li>
+     *     <li><b>VERBOSE</b>: Print both mod and Forge logs to console</li>
+     * </ul>
+     */
+    public enum DebugMode {
+
+        STANDARD("standard"),
+        VERBOSE("verbose");
+
+        private static DebugMode mode;
+        private final String name;
+
+        DebugMode(String mode) {
+            this.name = mode;
+        }
+        static DebugMode init() {
+            return mode = findFromSysProperties("debug.mode");
+        }
+        @Nullable
+        static DebugMode findFromSysProperties(String property) {
+
+            String sMode = System.getProperty(property);
+            for (DebugMode eMode : DebugMode.values()) {
+                if (eMode.name.equalsIgnoreCase(sMode))
+                    return eMode;
+            }
+            return null;
+        }
+        static boolean is(DebugMode mode) {
+            return DebugMode.mode == mode;
+        }
+    }
+    /* This is a private constructor, use init method to call from public */
+    private ModLogger(Logger loggerInst) {
+
+        logger = loggerInst;
+        DebugMode debugMode = DebugMode.init();
+
+        if (debugMode != null) {
+            /*
+             * This will enable Forge and mod Log4j debug logs to be printed to
+             * console in addition to the debug logfile.
+             */
+            if (debugMode.is(DebugMode.VERBOSE))
+            {
+                LoggerContext context = ((org.apache.logging.log4j.core.Logger) logger).getContext();
+                LoggerConfig logConfig = context.getConfiguration().getRootLogger();
+                Appender consoleAppender = logConfig.getAppenders().get("Console");
+                logConfig.removeAppender("Console");
+                logConfig.addAppender(consoleAppender, Level.DEBUG, null);
+            }
+            else logger.warn("unknown debug mode passed as VM argument");
         }
     }
     protected static void init(Logger logger) {
+
         if (instance == null)
             instance = new ModLogger(logger);
         else
-            instance.LOGGER.error("Trying to initialize ModLogger more than once");
+            instance.logger.warn("Trying to initialize ModLogger more than once");
     }
     @Contract(pure = true)
     public static Logger get() {
-        return instance.LOGGER;
+        return instance.logger;
     }
     /*
      * Short-hand methods to print longs to console.
      */
     public static void info(String log) {
-        instance.LOGGER.info(log);
+        instance.logger.info(log);
     }
     public static void error(String log) {
-        instance.LOGGER.error(log);
+        instance.logger.error(log);
     }
     public static void error(String log, Throwable e) {
-        instance.LOGGER.error(log, e);
+        instance.logger.error(log, e);
     }
-
+    /** Print debug log to console and mod logfile */
     public static void debug(String log) {
-        instance.LOGGER.debug(log);
+        if (DebugMode.is(DebugMode.STANDARD))
+            instance.logger.info(log);
+        instance.logger.debug(log);
+    }
+    /** Print debug log to console and mod logfile */
+    public static void debug(String format, Object...args) {
+        if (DebugMode.is(DebugMode.STANDARD))
+            instance.logger.printf(Level.INFO, format, args);
+        instance.logger.printf(Level.DEBUG, format, args);
     }
 }
