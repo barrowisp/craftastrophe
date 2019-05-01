@@ -2,10 +2,12 @@ package io.barrowisp.craftastrophe.items;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import io.barrowisp.craftastrophe.ModLogger;
+import io.barrowisp.craftastrophe.recipes.CustomRecipes;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
@@ -34,6 +36,12 @@ public class UnreadBlueprint extends ItemBase {
              */
             int knowledge = 3;
 
+            java.util.List<IRecipe> randomRecipes = CustomRecipes.getRandom(Blueprint.MAX_CUSTOM_RECIPES);
+            Blueprint.registerBlueprint(playerIn.getHeldItem(handIn), randomRecipes);
+
+            playerIn.addItemStackToInventory(new ItemStack(ModItem.BLUEPRINT.get()));
+            playerIn.getHeldItem(handIn).shrink(1);
+            playerIn.unlockRecipes(randomRecipes);
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
