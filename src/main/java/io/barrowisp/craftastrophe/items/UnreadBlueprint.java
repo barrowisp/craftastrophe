@@ -1,12 +1,16 @@
 package io.barrowisp.craftastrophe.items;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import io.barrowisp.craftastrophe.ModLogger;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class UnreadBlueprint extends ItemBase {
 
@@ -34,4 +38,9 @@ public class UnreadBlueprint extends ItemBase {
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, java.util.List<String> tooltip, ITooltipFlag flagIn)
+    {
+        tooltip.add(ChatFormatting.GRAY + "This paper contains some kind of crafting schematics");
+    }
 }
