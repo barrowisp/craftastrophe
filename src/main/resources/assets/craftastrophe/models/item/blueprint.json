@@ -1,3 +1,6 @@
 {
-  "parent": "item/paper"
+  "parent": "item/paper",
+  "textures": {
+    "layer0": "craftastrophe:blueprint"
+  }
 }
