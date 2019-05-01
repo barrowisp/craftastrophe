@@ -11,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 /**
  * Custom advancement trigger that fires when we read a blueprint.
  */
+@Deprecated
 public class ReadBlueprint extends ModTrigger<ReadBlueprint.Instance, Integer>
 {
     public ReadBlueprint()

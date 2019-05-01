@@ -1,6 +1,5 @@
 package io.barrowisp.craftastrophe.advancement;
 
-import io.barrowisp.craftastrophe.advancement.trigger.ReadBlueprint;
 import net.minecraft.advancements.CriteriaTriggers;
 
 /**
@@ -8,7 +7,7 @@ import net.minecraft.advancements.CriteriaTriggers;
  */
 public class ModAdvancementTriggers
 {
-    public static ReadBlueprint readBlueprint;
+    //public static ReadBlueprint readBlueprint;
 
     private static void register(ModTrigger trigger)
     {
@@ -19,7 +18,7 @@ public class ModAdvancementTriggers
      */
     public static void init()
     {
-        register(readBlueprint = new ReadBlueprint());
+        //register(readBlueprint = new ReadBlueprint());
     }
 
 }

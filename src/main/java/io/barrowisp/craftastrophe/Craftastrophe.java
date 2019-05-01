@@ -39,7 +39,7 @@ public class Craftastrophe {
         ModLogger.info("Pre-initializing " + Craftastrophe.MODID + "...");
 
         ModItem.init();
-        ModAdvancementTriggers.init();
+//        ModAdvancementTriggers.init();
     }
 
     @Mod.EventHandler
