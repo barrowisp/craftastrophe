@@ -2,6 +2,7 @@ package io.barrowisp.craftastrophe;
 
 import io.barrowisp.craftastrophe.advancement.ModAdvancementTriggers;
 import io.barrowisp.craftastrophe.items.ModItem;
+import io.barrowisp.craftastrophe.recipes.RecipeHandler;
 import net.minecraft.init.Items;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -45,5 +46,6 @@ public class Craftastrophe {
     public void init(FMLInitializationEvent event)
     {
         ModLogger.info("Initializing " + Craftastrophe.MODID + "...");
+        RecipeHandler.init();
     }
 }
