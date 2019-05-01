@@ -27,8 +27,8 @@ public class Craftastrophe {
             (new net.minecraft.creativetab.CreativeTabs("tabCraftastrophe") {
 
         @Override
-        public  net.minecraft.item.ItemStack getTabIconItem() {
-            return new  net.minecraft.item.ItemStack(Items.WRITABLE_BOOK);
+        public net.minecraft.item.ItemStack getTabIconItem() {
+            return new net.minecraft.item.ItemStack(Items.WRITABLE_BOOK);
         }
     });
 

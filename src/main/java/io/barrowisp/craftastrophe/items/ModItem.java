@@ -1,5 +1,6 @@
 package io.barrowisp.craftastrophe.items;
 
+import io.barrowisp.craftastrophe.ModLogger;
 import net.minecraft.item.Item;
 import org.jetbrains.annotations.Contract;
 
@@ -28,6 +29,7 @@ public enum ModItem {
      * Initialize all mod items and store them in a list.
      */
     public static void init() {
+        ModLogger.debug("Initializing mod items...");
         for (ModItem i : ModItem.values()) ModItem.ITEMS.add(i.instance);
         ModItem.ITEMS = java.util.Collections.unmodifiableList(ModItem.ITEMS);
     }
