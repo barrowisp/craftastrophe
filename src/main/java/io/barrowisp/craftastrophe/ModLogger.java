@@ -108,6 +108,9 @@ public class ModLogger {
     public static void error(String log, Throwable e) {
         instance.logger.error(log, e);
     }
+    public static void warn(String log) {
+        instance.logger.warn(log);
+    }
     /** Print debug log to console and mod logfile */
     public static void debug(String log) {
         if (DebugMode.is(DebugMode.STANDARD))
