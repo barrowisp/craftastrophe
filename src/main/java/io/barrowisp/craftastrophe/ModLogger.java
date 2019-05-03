@@ -114,13 +114,13 @@ public class ModLogger {
     /** Print debug log to console and mod logfile */
     public static void debug(String log) {
         if (DebugMode.is(DebugMode.STANDARD))
-            instance.logger.info(log);
+            instance.logger.info("DEBUG: " + log);
         instance.logger.debug(log);
     }
     /** Print debug log to console and mod logfile */
     public static void debug(String format, Object...args) {
         if (DebugMode.is(DebugMode.STANDARD))
-            instance.logger.printf(Level.INFO, format, args);
+            instance.logger.printf(Level.INFO, "DEBUG: " + format, args);
         instance.logger.printf(Level.DEBUG, format, args);
     }
 }
