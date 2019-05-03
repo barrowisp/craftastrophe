@@ -105,6 +105,9 @@ public class ModLogger {
     public static void error(String log) {
         instance.logger.error(log);
     }
+    public static void error(String log, Object...args) {
+        instance.logger.error(log, args);
+    }
     public static void error(String log, Throwable e) {
         instance.logger.error(log, e);
     }
