@@ -1,26 +1,18 @@
 package io.barrowisp.craftastrophe.recipes;
 
+import io.barrowisp.craftastrophe.Craftastrophe;
 import io.barrowisp.craftastrophe.ModLogger;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
-// TODO: Document this class and all it's methods
-public class RecipeHandler {
+public abstract class RecipeHandler {
 
-    private static RecipeHandler instance;
-    private final CustomRecipes customRecipes;
-
-    private RecipeHandler() {
-        customRecipes = new CustomRecipes();
-    }
-
-    public static void init() {
-
-        if (instance == null)
-            instance = new RecipeHandler();
-        else
-            ModLogger.warn("Trying to initialize RecipeHandler more then once");
-    }
-
-    static CustomRecipes getCustomRecipes() {
-        return instance.customRecipes;
+    /**
+     * Call this from {@link Craftastrophe#init(FMLInitializationEvent)} after all other
+     * mod recipes are already initialized in Forge recipe registry.
+     * @throws ClassNotFoundException if the {@code CustomRecipes} class was not found
+     */
+    public static void init() throws ClassNotFoundException {
+        ModLogger.debug("Loading CustomRecipes class");
+        Class.forName(CustomRecipes.class.getName());
     }
 }

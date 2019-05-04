@@ -1,38 +1,50 @@
 package io.barrowisp.craftastrophe.recipes;
 
 import io.barrowisp.craftastrophe.ModLogger;
-import javafx.util.Pair;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.concurrent.Immutable;
 import java.util.Map;
 
 /**
- *  This class contains custom mod recipes as well all methods
- *  related to handling these entries. The class instance is created
- *  and stored in {@link io.barrowisp.craftastrophe.recipes.RecipeHandler}.
+ * This class contains mappings for custom mod recipes as well all methods
+ * related to handling these entries. The mappings are initalized on first class load.
+ * @see RecipeHandler#init()
  */
-public class CustomRecipes {
+@Immutable
+public abstract class CustomRecipes {
 
-    /** List of custom mod recipes paired with custom data entries */
-    final Map<IRecipe, RecipeData> map;
-    private final Map<ResourceLocation, IRecipe> entries;
+    /**
+     * Custom mod recipes found in Forge registry mapped to their registry names
+     * so that they can be easily retrieved by systems like blueprints and others
+     * that store recipe references in itemstack {@code NBTTagLists}.
+     */
+    private static final Map<ResourceLocation, IRecipe> map =
+            java.util.Collections.unmodifiableMap(readCustomRecipes());
 
-    CustomRecipes() {
-        Pair<Map<IRecipe, RecipeData>, Map<ResourceLocation, IRecipe>> data = readCustomRecipes();
-        map = java.util.Collections.unmodifiableMap(data.getKey());
-        entries = java.util.Collections.unmodifiableMap(data.getValue());
+    /** @return {@code false} if no custom mod recipes were found in Forge registry */
+    public static boolean exist() {
+        return map.isEmpty();
     }
-
+    /** @return custom {@code IRecipe} that coresponds to parameter {@code ResourceLocation} */
+    public static IRecipe getRecipe(ResourceLocation location) {
+        return map.get(location);
     }
+    /**
+     * @return array of recipe ouput item names useful for tooltips
+     */
+    public static @NotNull String[] getOutputs(java.util.List<IRecipe> recipes) {
 
-    /** Get recipe data for custom mod recipe */
-    public static RecipeData getRecipeData(IRecipe recipe) {
-        return RecipeHandler.getCustomRecipes().map.get(recipe);
+        java.util.Set<String> outputs = new java.util.HashSet<>();
+        for (IRecipe recipe : recipes) {
+            outputs.add(recipe.getRecipeOutput().getDisplayName());
+        }
+        return outputs.toArray(new String[0]);
     }
-
     /**
      * Returns a list of random custom recipes from an internal map
      * @param maxAmount maximum amount of recipes we want to get.
@@ -42,51 +54,38 @@ public class CustomRecipes {
     public static java.util.List<IRecipe> getRandom(int maxAmount) {
 
         ModLogger.debug("Getting random number of custom recipes (1-%d)", maxAmount);
-        CustomRecipes customRecipes = RecipeHandler.getCustomRecipes();
         java.util.List<IRecipe> recipes = new java.util.ArrayList<>();
         /* No custom mod recipes found in Forge registry */
-        if (customRecipes.map.isEmpty()) {
-            return recipes;
-        }
+        if (map.isEmpty()) return recipes;
+
         /* Convert the map key set to a primitive array for easier access */
-        IRecipe[] recipeArray = customRecipes.map.keySet().toArray(new IRecipe[customRecipes.map.size()]);
+        IRecipe[] recipeArray = map.values().toArray(new IRecipe[0]);
 
         for (int am = new java.util.Random().nextInt(maxAmount) + 1; am > 0; am--) {
-            int index = new java.util.Random().nextInt(customRecipes.map.size());
+            int index = new java.util.Random().nextInt(map.size());
             recipes.add(recipeArray[index]);
         }
         return recipes;
     }
 
     /**
-     * Read the game recipes from Forge registry and find custom mod recipes.
-     * @return list of custom mod recipes. Returns an empty list if no custom recipes are found.
+     * Iterate through Forge recipe registry and return other mod recipes
      */
-    private static Pair<Map<IRecipe, RecipeData>, Map<ResourceLocation, IRecipe>> readCustomRecipes() {
+    private static Map<ResourceLocation, IRecipe> readCustomRecipes() {
 
-        IForgeRegistry<IRecipe> vanillaRecipes = ForgeRegistries.RECIPES;
-        Map<IRecipe, RecipeData> modRecipes = new java.util.Hashtable<>();
-        Map<ResourceLocation, IRecipe> recipeEntries = new java.util.Hashtable<>();
+        IForgeRegistry<IRecipe> gameRecipes = ForgeRegistries.RECIPES;
+        Map<ResourceLocation, IRecipe> modRecipes = new java.util.Hashtable<>();
 
-        ModLogger.debug("Iterating through game recipes (size: %d)", vanillaRecipes.getEntries().size());
-        for (IRecipe recipe : vanillaRecipes) {
-            if (CustomRecipes.validate(recipe)) {
-                modRecipes.put(recipe, new RecipeData(recipe));
-                recipeEntries.put(recipe.getRegistryName(), recipe);
+        ModLogger.debug("Iterating through game recipes (size: %d)", gameRecipes.getEntries().size());
+        for (IRecipe recipe : gameRecipes)
+        {
+            ResourceLocation location = recipe.getRegistryName();
+            String domain = location != null ? location.getResourceDomain() : "";
+
+            if (!domain.isEmpty() && !domain.equals("minecraft")) {
+                modRecipes.put(location, recipe);
             }
         }
-        return new Pair<>(modRecipes, recipeEntries);
-    }
-
-    /**
-     * Check to see if the recipe is a custom mod recipe.
-     *
-     * @param recipe instance of the recipe to validate
-     * @return {@code true} if the recipe is custom
-     */
-    private static boolean validate(IRecipe recipe) {
-
-        String[] recipeMeta = RecipeData.getMeta(recipe);
-        return recipeMeta.length > 1 && !recipeMeta[0].equals("minecraft");
+        return modRecipes;
     }
 }

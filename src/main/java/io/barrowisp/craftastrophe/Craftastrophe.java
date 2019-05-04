@@ -43,7 +43,7 @@ public class Craftastrophe {
     }
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event)
+    public void init(FMLInitializationEvent event) throws ClassNotFoundException
     {
         ModLogger.info("Initializing " + Craftastrophe.MODID + "...");
         RecipeHandler.init();
