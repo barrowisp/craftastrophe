@@ -38,7 +38,7 @@ public class CustomRecipes {
         if (customRecipes.map.size() == 0)
             return recipes;
 
-        for (int am = new java.util.Random().nextInt(amount - 1) + 1; am > 0; am--) {
+        for (int am = new java.util.Random().nextInt(maxAmount) + 1; am > 0; am--) {
             int index = new java.util.Random().nextInt(customRecipes.map.size());
             recipes.add((IRecipe) customRecipes.map.keySet().toArray()[index]);
         }
