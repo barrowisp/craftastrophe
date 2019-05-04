@@ -1,9 +1,13 @@
 package io.barrowisp.craftastrophe.recipes;
 
 import io.barrowisp.craftastrophe.ModLogger;
+import javafx.util.Pair;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import java.util.Map;
 
 /**
  *  This class contains custom mod recipes as well all methods
@@ -13,10 +17,15 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class CustomRecipes {
 
     /** List of custom mod recipes paired with custom data entries */
-    private final java.util.Map<IRecipe, RecipeData> map;
+    final Map<IRecipe, RecipeData> map;
+    private final Map<ResourceLocation, IRecipe> entries;
 
     CustomRecipes() {
-        map = java.util.Collections.unmodifiableMap(readCustomRecipes());
+        Pair<Map<IRecipe, RecipeData>, Map<ResourceLocation, IRecipe>> data = readCustomRecipes();
+        map = java.util.Collections.unmodifiableMap(data.getKey());
+        entries = java.util.Collections.unmodifiableMap(data.getValue());
+    }
+
     }
 
     /** Get recipe data for custom mod recipe */
@@ -25,22 +34,26 @@ public class CustomRecipes {
     }
 
     /**
-     * Returns a list of random custom recipes
-     * @param amount maximum amount of recipes we want to get.
-     *               The actual number of recipes returned is random.
+     * Returns a list of random custom recipes from an internal map
+     * @param maxAmount maximum amount of recipes we want to get.
+     *        <p>The actual number of recipes returned is random.</p>
      * @return a random list of custom recipes
      */
-    public static java.util.List<IRecipe> getRandom(int amount) {
+    public static java.util.List<IRecipe> getRandom(int maxAmount) {
 
+        ModLogger.debug("Getting random number of custom recipes (1-%d)", maxAmount);
         CustomRecipes customRecipes = RecipeHandler.getCustomRecipes();
         java.util.List<IRecipe> recipes = new java.util.ArrayList<>();
         /* No custom mod recipes found in Forge registry */
-        if (customRecipes.map.size() == 0)
+        if (customRecipes.map.isEmpty()) {
             return recipes;
+        }
+        /* Convert the map key set to a primitive array for easier access */
+        IRecipe[] recipeArray = customRecipes.map.keySet().toArray(new IRecipe[customRecipes.map.size()]);
 
         for (int am = new java.util.Random().nextInt(maxAmount) + 1; am > 0; am--) {
             int index = new java.util.Random().nextInt(customRecipes.map.size());
-            recipes.add((IRecipe) customRecipes.map.keySet().toArray()[index]);
+            recipes.add(recipeArray[index]);
         }
         return recipes;
     }
@@ -49,18 +62,20 @@ public class CustomRecipes {
      * Read the game recipes from Forge registry and find custom mod recipes.
      * @return list of custom mod recipes. Returns an empty list if no custom recipes are found.
      */
-    private static java.util.Map<IRecipe, RecipeData> readCustomRecipes() {
+    private static Pair<Map<IRecipe, RecipeData>, Map<ResourceLocation, IRecipe>> readCustomRecipes() {
 
         IForgeRegistry<IRecipe> vanillaRecipes = ForgeRegistries.RECIPES;
-        java.util.Map<IRecipe, RecipeData> modRecipes = new java.util.HashMap<>();
+        Map<IRecipe, RecipeData> modRecipes = new java.util.Hashtable<>();
+        Map<ResourceLocation, IRecipe> recipeEntries = new java.util.Hashtable<>();
 
         ModLogger.debug("Iterating through game recipes (size: %d)", vanillaRecipes.getEntries().size());
         for (IRecipe recipe : vanillaRecipes) {
             if (CustomRecipes.validate(recipe)) {
                 modRecipes.put(recipe, new RecipeData(recipe));
+                recipeEntries.put(recipe.getRegistryName(), recipe);
             }
         }
-        return modRecipes;
+        return new Pair<>(modRecipes, recipeEntries);
     }
 
     /**
