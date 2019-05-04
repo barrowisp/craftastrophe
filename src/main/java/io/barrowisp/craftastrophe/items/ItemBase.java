@@ -1,11 +1,12 @@
 package io.barrowisp.craftastrophe.items;
 
 import io.barrowisp.craftastrophe.Craftastrophe;
+import io.barrowisp.craftastrophe.defines.ModItemName;
 import net.minecraft.item.Item;
 
-public class ItemBase extends Item {
+class ItemBase extends Item {
 
-    protected ItemBase(String name) {
+    ItemBase(@ModItemName String name) {
 
         setUnlocalizedName(name);
         setRegistryName(name);
