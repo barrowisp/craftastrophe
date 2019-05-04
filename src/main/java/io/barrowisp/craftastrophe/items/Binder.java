@@ -22,15 +22,16 @@ public class Binder extends ItemBase {
      */
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ModLogger.debug("Stashing unintelligible blueprints...");
-        /** the following lines are an attempt to separate foundational recipes from more-advanced recipes.
+        /*
+         *  The following lines are an attempt to separate foundational recipes from more-advanced recipes.
          *  If any of the Blueprints in the player's inventory are of an appropriate tier,
          *  then the player will trigger the Read event and receive a recipe.
          *  Any remaining Blueprints should be archived until the next time the Binder is used.
          */
-        if (playerIn instanceof EntityPlayerMP) {
+        /*if (playerIn instanceof EntityPlayerMP) {
             int knowledge = 3;
             ModAdvancementTriggers.readBlueprint.trigger((EntityPlayerMP) playerIn, knowledge);
-        }
+        }*/
         return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
       //need to add else code that makes the loose Blueprints leave the player's inventory in a retrievable way
     }
