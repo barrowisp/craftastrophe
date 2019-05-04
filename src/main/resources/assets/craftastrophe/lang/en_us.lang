@@ -7,7 +7,6 @@ itemGroup.tabCraftastrophe=Craftastrophe
 # In the code, a Blueprint is an item which awards new recipes to the player.
 # In the world, a Blueprint item will display the name Crafting Plan.
 item.blueprint.name=Crafting Plan
-item.unread_blueprint.name=Mysterious Paper
 
 # Similarly, a portfolio for collecting Blueprints is currently known to the player as Documents Stash
 item.binder.name=Documents Stash

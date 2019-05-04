@@ -7,7 +7,6 @@ import org.jetbrains.annotations.Contract;
 public enum ModItem {
 
     BLUEPRINT(new Blueprint("blueprint")),
-    UNREAD_BLUEPRINT(new UnreadBlueprint("unread_blueprint")),
 
     /**
      * Attempting to add another custom Item,
