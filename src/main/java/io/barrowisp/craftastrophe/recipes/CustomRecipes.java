@@ -6,6 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.concurrent.Immutable;
 import java.util.Map;
@@ -23,15 +24,15 @@ public abstract class CustomRecipes {
      * so that they can be easily retrieved by systems like blueprints and others
      * that store recipe references in itemstack {@code NBTTagLists}.
      */
-    private static final Map<ResourceLocation, IRecipe> map =
+    private static final @NotNull Map<ResourceLocation, IRecipe> map =
             java.util.Collections.unmodifiableMap(readCustomRecipes());
 
     /** @return {@code false} if no custom mod recipes were found in Forge registry */
     public static boolean exist() {
-        return map.isEmpty();
+        return !map.isEmpty();
     }
     /** @return custom {@code IRecipe} that coresponds to parameter {@code ResourceLocation} */
-    public static IRecipe getRecipe(ResourceLocation location) {
+    public static @Nullable IRecipe getRecipe(ResourceLocation location) {
         return map.get(location);
     }
     /**
@@ -51,7 +52,7 @@ public abstract class CustomRecipes {
      *        <p>The actual number of recipes returned is random.</p>
      * @return a random list of custom recipes
      */
-    public static java.util.List<IRecipe> getRandom(int maxAmount) {
+    public static @NotNull java.util.List<IRecipe> getRandom(int maxAmount) {
 
         ModLogger.debug("Getting random number of custom recipes (1-%d)", maxAmount);
         java.util.List<IRecipe> recipes = new java.util.ArrayList<>();
@@ -86,6 +87,7 @@ public abstract class CustomRecipes {
                 modRecipes.put(location, recipe);
             }
         }
+        ModLogger.debug("Found %d custom mod recipes", modRecipes.size());
         return modRecipes;
     }
 }
