@@ -25,6 +25,11 @@ public enum ModItem {
     public Item get() {
         return instance;
     }
+
+    public boolean isItemIn(net.minecraft.item.ItemStack stack) {
+        return instance.getClass() == stack.getItem().getClass();
+    }
+
     /**
      * Initialize all mod items and store them in a list.
      */
