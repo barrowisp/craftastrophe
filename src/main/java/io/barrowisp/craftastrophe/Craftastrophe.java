@@ -35,8 +35,10 @@ public class Craftastrophe {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        ModLogger.init(event.getModLog());
-        ModLogger.info("Pre-initializing " + Craftastrophe.MODID + "...");
+        /* Make sure we initialize the logging system before doing
+         * anything else that might produce logs
+         */
+        ModLogger.init();
 
         ModItem.init();
 //        ModAdvancementTriggers.init();
