@@ -1,6 +1,6 @@
 package io.barrowisp.craftastrophe;
 
-import io.barrowisp.craftastrophe.common.ModCapabilities;
+import io.barrowisp.craftastrophe.capabilities.ModCapabilities;
 import io.barrowisp.craftastrophe.items.ModItem;
 import io.barrowisp.craftastrophe.recipes.RecipeHandler;
 import net.minecraft.init.Items;
@@ -53,5 +53,6 @@ public class Craftastrophe {
     {
         ModLogger.info("Initializing " + NAME + " mod...");
         RecipeHandler.init();
+        ModCapabilities.init();
     }
 }
