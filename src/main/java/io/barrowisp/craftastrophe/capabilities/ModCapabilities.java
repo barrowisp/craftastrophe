@@ -23,9 +23,18 @@ public class ModCapabilities {
     public static void init() {
 
         ModLogger.debug("Initializing mod capabilities.");
+        register(Knowledge.class, Knowledge.Impl::new);
     }
     private static <T extends PlayerCapability> void register(Class<T> type, Callable<? extends T> factory) {
         CapabilityManager.INSTANCE.register(type, new CapabilityStorage<>(), factory);
     }
 
+    public static Knowledge getPlayerKnowledge(EntityPlayer player) {
+
+        Knowledge knowledge = player.getCapability(ModCapabilities.KNOWLEDGE, null);
+        if (knowledge == null) {
+            ModLogger.error("Unable to find Knowledge player capability.");
+        }
+        return knowledge;
+    }
 }

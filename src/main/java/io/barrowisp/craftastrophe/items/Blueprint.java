@@ -2,6 +2,7 @@ package io.barrowisp.craftastrophe.items;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import io.barrowisp.craftastrophe.ModLogger;
+import io.barrowisp.craftastrophe.capabilities.Knowledge;
 import io.barrowisp.craftastrophe.recipes.CustomRecipes;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -363,6 +364,7 @@ public class Blueprint extends ItemBase {
                     if (!recipesToLearn.isEmpty())
                     {
                         playerIn.unlockRecipes(recipesToLearn);
+                        Knowledge.increasePlayerKnowledge(playerIn, 1);
                         ModLogger.debug("%s learned %d new recipes from blueprint", player.getName(), recipesToLearn.size());
                     }
                     else ModLogger.debug("Blueprint doesn't contain any new recipes to learn");
