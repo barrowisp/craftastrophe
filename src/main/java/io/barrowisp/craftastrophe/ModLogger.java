@@ -96,7 +96,7 @@ public abstract class ModLogger {
         logger.error(log);
     }
     public static void error(String log, Object...args) {
-        logger.error(log, args);
+        logger.printf(Level.ERROR, log, args);
     }
     public static void error(String log, Throwable e) {
         logger.error(log, e);
