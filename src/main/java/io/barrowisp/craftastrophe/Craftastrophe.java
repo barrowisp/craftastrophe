@@ -1,13 +1,15 @@
 package io.barrowisp.craftastrophe;
 
-import io.barrowisp.craftastrophe.advancement.ModAdvancementTriggers;
+import io.barrowisp.craftastrophe.common.ModCapabilities;
 import io.barrowisp.craftastrophe.items.ModItem;
 import io.barrowisp.craftastrophe.recipes.RecipeHandler;
 import net.minecraft.init.Items;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("unused")
 @Mod(modid = Craftastrophe.MODID, name = Craftastrophe.NAME, version = Craftastrophe.VERSION)
 public class Craftastrophe {
 
@@ -27,7 +29,7 @@ public class Craftastrophe {
             (new net.minecraft.creativetab.CreativeTabs("tabCraftastrophe") {
 
         @Override
-        public net.minecraft.item.ItemStack getTabIconItem() {
+        public @NotNull net.minecraft.item.ItemStack getTabIconItem() {
             return new net.minecraft.item.ItemStack(Items.WRITABLE_BOOK);
         }
     });
@@ -40,6 +42,8 @@ public class Craftastrophe {
          */
         ModLogger.init();
 
+        ModLogger.info("Pre-initializing " + NAME + " mod...");
+
         ModItem.init();
 //        ModAdvancementTriggers.init();
     }
@@ -47,7 +51,7 @@ public class Craftastrophe {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) throws ClassNotFoundException
     {
-        ModLogger.info("Initializing " + Craftastrophe.MODID + "...");
+        ModLogger.info("Initializing " + NAME + " mod...");
         RecipeHandler.init();
     }
 }
