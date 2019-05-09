@@ -63,6 +63,13 @@ public abstract class ModLogger {
             return DebugMode.mode == mode;
         }
     }
+    /**
+     * @return {@code true} if the current session is running in debug mode.
+     */
+    public static boolean isDebug() {
+        return DebugMode.mode != null && !DebugMode.is(DebugMode.UNKNOWN);
+    }
+
     static void init() {
 
         if (DebugMode.init()) {
