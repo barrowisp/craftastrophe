@@ -127,4 +127,11 @@ public abstract class ModLogger {
             logger.printf(Level.INFO, "DEBUG: " + format, args);
 
     }
+    /** Print debug log to console and mod logfile */
+    public static void debug(String log, Throwable e) {
+
+        logger.debug(log, e);
+        if (DebugMode.is(DebugMode.STANDARD))
+            logger.info("DEBUG: " + log, e);
+    }
 }

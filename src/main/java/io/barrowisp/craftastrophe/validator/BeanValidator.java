@@ -124,28 +124,32 @@ public final class BeanValidator {
         Object value = violation.getInvalidValue();
         Object field = violation.getPropertyPath();
         String message = violation.getMessage();
+        Level level = Level.ERROR;
 
         Annotation annotation = violation.getConstraintDescriptor().getAnnotation();
-        java.util.Map<String, Object> attributes = AnnotationUtils.getAttributes(annotation);
-        Level level = AnnotationUtils.getLogLevel(annotation, Level.ERROR);
-
-        /* Parse our annotation violation message and replace all words marked with the regex key
-         * with an annotation attribute value that holds the same name.
-         */
-        Matcher matcher = PARSE_REGEX.getKey().matcher(message);
-        while (matcher.find())
+        if (AnnotationUtils.isCustomModAnnotation(annotation))
         {
-            String group = matcher.group(PARSE_REGEX.getValue());
-            Object oReplacement = group.equals("value") ? value : attributes.get(group);
-            String sReplacement = StringUtils.smartQuote(oReplacement);
-            message = message.replace(REGEX_KEY + group, sReplacement);
-        }
+            java.util.Map<String, Object> attributes = AnnotationUtils.getAttributes(annotation);
+            String sLevel = AnnotationUtils.getAttributeValue(annotation, "level", String.class);
+            level = Level.toLevel(sLevel, Level.ERROR);
 
-        if (message.contains("\n")) {
-            for (String log : message.split(Defines.NEW_LINE))
-                ModLogger.get().printf(level, log);
+            /* Parse our annotation violation message and replace all words marked with the regex key
+             * with an annotation attribute value that holds the same name.
+             */
+            Matcher matcher = PARSE_REGEX.getKey().matcher(message);
+            while (matcher.find()) {
+                String group = matcher.group(PARSE_REGEX.getValue());
+                Object oReplacement = group.equals("value") ? value : attributes.get(group);
+                String sReplacement = StringUtils.smartQuote(oReplacement);
+                message = message.replace(REGEX_KEY + group, sReplacement);
+            }
         }
-        else ModLogger.get().printf(level, message);
+        /* Print the violation message to console with the appropriate level.
+         * Also print an exception stack trace as a debug log
+         */
+        ModLogger.get().printf(level, message);
+        ModLogger.debug(message, new Exception(String.format("Field '%s' with value '%s' has violated " +
+                "annotation constrains of %s", field, value, annotation.annotationType().getName())));
     }
 
     /**

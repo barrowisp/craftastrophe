@@ -1,10 +1,9 @@
 package io.barrowisp.craftastrophe.util;
 
 import io.barrowisp.craftastrophe.ModLogger;
-import io.barrowisp.craftastrophe.defines.AnnotationLogLevel;
+import io.barrowisp.craftastrophe.defines.CustomModAnnotation;
 import org.apache.logging.log4j.Level;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import org.apache.logging.log4j.spi.StandardLevel;
 import org.jetbrains.annotations.Nullable;
 
 import javax.validation.constraints.NotEmpty;
@@ -74,11 +73,9 @@ public class AnnotationUtils {
         }
         return (T) value;
     }
-    @Contract("_, null -> null")
-    public static Level getLogLevel(Annotation annotation, Level defaultLvl) {
 
-        AnnotationLogLevel level = getAttributeValue(annotation, "level", AnnotationLogLevel.class);
-        return level != null ? level.level : defaultLvl;
+    public static boolean isCustomModAnnotation(Annotation annotation) {
+        return annotation.annotationType().getDeclaredAnnotation(CustomModAnnotation.class) != null;
     }
 
     /**
