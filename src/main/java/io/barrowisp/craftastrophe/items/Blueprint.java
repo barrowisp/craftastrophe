@@ -24,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @MethodsNotNull
 public class Blueprint extends ItemBase {
@@ -82,7 +83,7 @@ public class Blueprint extends ItemBase {
          * @see BlueprintData#add(java.util.UUID, List)
          */
         static void add(NBTTagCompound nbt, java.util.List<IRecipe> recipes) {
-            add(nbt.getUniqueId(BlueprintNBT.ID), recipes);
+            add(BlueprintNBT.getUniqueID(nbt), recipes);
         }
         /**
          * Retrieve list of blueprint recipes mapped to given itemstack
@@ -93,7 +94,7 @@ public class Blueprint extends ItemBase {
             NBTTagCompound nbtTagCompound = BlueprintNBT.getSavedData(stack);
             if (nbtTagCompound != null)
             {
-                java.util.UUID uuid = nbtTagCompound.getUniqueId(BlueprintNBT.ID);
+                java.util.UUID uuid = BlueprintNBT.getUniqueID(nbtTagCompound);
                 ModLogger.debug("Retrieving BlueprintData entry: %s", uuid.toString());
 
                 java.util.List<IRecipe> recipes = map.get(uuid);
@@ -153,6 +154,19 @@ public class Blueprint extends ItemBase {
         static java.util.UUID generateUniqueId() {
             return java.util.UUID.randomUUID();
         }
+        /**
+         * @return {@code UUID} object from {@code NBTTagCompound} that identifies the blueprint item
+         * @throws NullPointerException if the {@code NBTTagCompound} does not belong to a blueprint
+         * item or the {@code UUID} was not saved when the blueprint was being initialized.
+         *
+         * @see #generateUniqueId()
+         * @see #initializeBlueprint(ItemStack, EntityPlayerMP)
+         */
+        static java.util.UUID getUniqueID(NBTTagCompound nbtTagCompound) {
+
+            java.util.UUID uuid = nbtTagCompound.getUniqueId(BlueprintNBT.ID);
+            return Objects.requireNonNull(uuid, "Unable to retrieve blueprint ID");
+        }
 
         /**
          * Retrieve itemstack {@code NBT} subcompound that represents blueprint data
@@ -203,8 +217,8 @@ public class Blueprint extends ItemBase {
      */
     private static boolean initializeBlueprint(final ItemStack stack, EntityPlayerMP player) {
 
-        if (stack == null || !stack.getItem().equals(ModItem.BLUEPRINT.get())) {
-            ModLogger.error("Unable to register blueprint, invalid ItemStack argument!");
+        if (!stack.getItem().equals(ModItem.BLUEPRINT.get())) {
+            throw new IllegalArgumentException("Unable to register blueprint, invalid ItemStack argument!");
         }
         else if (!isUnregistered(stack)) {
             ModLogger.warn("Trying to register same blueprint twice");
@@ -220,7 +234,7 @@ public class Blueprint extends ItemBase {
                  *  If the stack has multiple items don't assign recipes to the whole stack.
                  *  We always want to register ONLY stacks with a count of 1
                  */
-                if (player != null && stack.getCount() > 1) {
+                if (stack.getCount() > 1) {
                     /*
                      *  When dealing with a stack of multiple items
                      *
@@ -249,8 +263,10 @@ public class Blueprint extends ItemBase {
                  * so they can be stored in itemstack NBTTagCompound
                  */
                 NBTTagList nbtTagList = new NBTTagList();
-                randomRecipes.forEach(recipe -> nbtTagList.appendTag(new NBTTagString(recipe.getRegistryName().toString())));
-
+                for (IRecipe recipe : randomRecipes) {
+                    nbtTagList.appendTag(new NBTTagString(Objects.requireNonNull(recipe.getRegistryName(),
+                            "Unable to find recipe " + recipe.getClass().getName() + " registry name").toString()));
+                }
                 String tooltip = String.join(", ", CustomRecipes.getOutputs(randomRecipes));
                 java.util.UUID uniqueId = BlueprintNBT.generateUniqueId();
                 /*
@@ -283,7 +299,7 @@ public class Blueprint extends ItemBase {
      * @param blueprint blueprint itemstack to load or initialize
      * @param player instance of the player reading the blueprint
      */
-    private static void loadOrRegisterBlueprint(ItemStack blueprint, @Nullable EntityPlayerMP player) {
+    private static void loadOrRegisterBlueprint(ItemStack blueprint, EntityPlayerMP player) {
 
         ModLogger.debug("Found unregistered blueprint: %s", blueprint.toString());
         if (!loadBlueprint(blueprint) && !initializeBlueprint(blueprint, player))

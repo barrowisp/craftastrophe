@@ -3,12 +3,15 @@ package io.barrowisp.craftastrophe.advancement;
 import com.google.gson.JsonObject;
 import io.barrowisp.craftastrophe.Craftastrophe;
 import io.barrowisp.craftastrophe.ModLogger;
+import io.barrowisp.craftastrophe.defines.MethodsNotNull;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 
+@MethodsNotNull
 public abstract class ModTrigger<I extends ModCriterionInstance<O>, O> implements ICriterionTrigger<I>
 {
     protected final ResourceLocation ID;
@@ -26,6 +29,7 @@ public abstract class ModTrigger<I extends ModCriterionInstance<O>, O> implement
         ID = new ResourceLocation(Craftastrophe.MODID, trigger);
         this.condition = condition;
     }
+
 
     @Override
     public ResourceLocation getId()
@@ -83,9 +87,9 @@ public abstract class ModTrigger<I extends ModCriterionInstance<O>, O> implement
      * @param json entry to scan for our value
      * @return {@code null} if the condition is not defined in the {@code json} file
      */
-    protected String getTriggerConditionFrom(JsonObject json)
+    protected @Nullable String getTriggerConditionFrom(JsonObject json)
     {
-        String trigger = condition != null && json.has(condition) ? JsonUtils.getString(json, condition) : null;
+        String trigger = json.has(condition) ? JsonUtils.getString(json, condition) : null;
         ModLogger.debug("Reading trigger condition " + json.toString() + " from json file");
         return trigger;
     }
