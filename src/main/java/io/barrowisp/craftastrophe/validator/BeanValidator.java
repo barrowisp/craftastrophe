@@ -1,8 +1,6 @@
 package io.barrowisp.craftastrophe.validator;
 
 import io.barrowisp.craftastrophe.ModLogger;
-import io.barrowisp.craftastrophe.common.Defines;
-import io.barrowisp.craftastrophe.items.ItemBase;
 import io.barrowisp.craftastrophe.util.AnnotationUtils;
 import io.barrowisp.craftastrophe.util.StringUtils;
 
@@ -60,24 +58,25 @@ public final class BeanValidator {
 
     /**
      * <p>Create, initialize and <b>validate</b> a new instance of a mod item.</p>
-     * A mod item is only recognized if it extends {@link ItemBase}.
+     * A mod item is only recognized if it extends it's parent base class.
      *
-     * @param clazz mod item's main class
+     * @param parentClass mod item's parent class
+     * @param itemClass mod item's main class
      * @param params constructor initialization parameters
      * @return newly constructed and validated item instance
      * @throws IllegalArgumentException when no item constructor with the
      * supplied parameters could be found
      */
     @SuppressWarnings("unchecked")
-    public static <T extends ItemBase> T constructItem(Class<T> clazz, Object...params) {
+    public static <T> T constructItem(Class<? super T> parentClass, Class<T> itemClass, Object...params) {
 
         /* Bean constraint validation doesn't seem to process parent constructors
          * so we have to manually validate their parameters first
          */
-        Constructor<T> constructor = getConstructor(ItemBase.class, params);
+        Constructor<T> constructor = getConstructor(parentClass, params);
         java.util.Set<ConstraintViolation<T>> parentViolations = validateConstructorParams(constructor, params);
 
-        constructor = getConstructor(clazz, params);
+        constructor = getConstructor(itemClass, params);
         java.util.Set<ConstraintViolation<T>> childViolations = validateConstructorParams(constructor, params);
 
         /* In case both child and parent constructor produced contraint violations
