@@ -82,7 +82,7 @@ public final class BeanValidator {
         constructor = getConstructor(itemClass, params);
         java.util.Set<ConstraintViolation<T>> childViolations = validateConstructorParams(constructor, params);
 
-        /* In case both child and parent constructor produced contraint violations
+        /* In case both child and parent constructor produced constraint violations
          * on the same method parameters we need to filter the child constructor
          * violations to exclude the duplicates so we don't do double prints.
          */
@@ -118,7 +118,7 @@ public final class BeanValidator {
     }
 
     /**
-     * <p>This method gets called whenever new violatiosn are returned by validators.</p>
+     * <p>This method gets called whenever new violations are returned by validators.</p>
      * It will parse the constraint message and print it with the appropriate level.
      */
     private static void processViolation(ConstraintViolation violation) {

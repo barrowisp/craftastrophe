@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
  *     <li>All characters <b>HAVE</b> to be {@code lower-case}.</li>
  * </ul>
  * In addition to these rules a Forge identifier used to register game objects <i>should</i>
- * be formatted according to the following set of conventions for better readibility and easier maintenance:
+ * be formatted according to the following set of conventions for better readability and easier maintenance:
  * <ul>
  *      <li>Identifier domain and path should always start with an alphabet letter.</b></li>
  *      <li>Permitted special characters can only be used to separate words.</li>
@@ -63,7 +63,7 @@ import java.util.regex.Pattern;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE, ElementType.CONSTRUCTOR })
 @Constraint(validatedBy = { RegistryNameValidator.class })
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "SpellCheckingInspection"})
 public @interface ForgeRegIdentifier {
 
     String level() default "ERROR";

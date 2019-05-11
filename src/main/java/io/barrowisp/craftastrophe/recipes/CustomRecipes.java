@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * This class contains mappings for custom mod recipes as well all methods
- * related to handling these entries. The mappings are initalized on first class load.
+ * related to handling these entries. The mappings are initialized on first class load.
  * @see RecipeHandler#init()
  */
 @Immutable
@@ -32,12 +32,12 @@ public abstract class CustomRecipes {
     public static boolean exist() {
         return !map.isEmpty();
     }
-    /** @return custom {@code IRecipe} that coresponds to parameter {@code ResourceLocation} */
+    /** @return custom {@code IRecipe} that corresponds to parameter {@code ResourceLocation} */
     public static @Nullable IRecipe getRecipe(ResourceLocation location) {
         return map.get(location);
     }
     /**
-     * @return array of recipe ouput item names useful for tooltips
+     * @return array of recipe output item names useful for tooltips
      */
     public static String[] getOutputs(java.util.List<IRecipe> recipes) {
 

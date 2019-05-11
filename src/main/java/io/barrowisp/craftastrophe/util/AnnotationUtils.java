@@ -80,7 +80,7 @@ public class AnnotationUtils {
 
     /**
      * Changes the annotation value for the given key of the given annotation
-     * to newValue and return sthe previous value.
+     * to newValue and return the previous value.
      *
      * @author Balder@stackoverflow
      * @see <a href="https://stackoverflow.com/a/28118436/7803527">Origin code on Stackoverflow</a>

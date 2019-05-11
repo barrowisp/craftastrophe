@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 
 /**
  * This class interacts with {@link CapabilityProvider} to write and read from NBT.
- * It is instantialized in every new mod capability registration process.
+ * It is instantiated in every new mod capability registration process.
  *
  * @param <T> PlayerCapability interface this storage belongs to
  */

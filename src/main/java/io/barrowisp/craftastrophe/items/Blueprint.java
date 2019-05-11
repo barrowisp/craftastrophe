@@ -118,11 +118,11 @@ public class Blueprint extends ItemBase {
 
     /**
      * <p>This class contains NBT related methods for blueprints in addition to NBTTagCompound
-     * tagmap key names that make it easier for us to set and get keys when accessing Itemstack stored data.</p>
+     * tagmap key names that make it easier for us to set and get keys when accessing itemstack stored data.</p>
      * <br/>
      *     List of map names and what they contain:
      * <ul>
-     *     <li><b>TAG</b> - NBT subcompound tag key that maps blueprint data.</li>
+     *     <li><b>TAG</b> - NBT sub-compound tag key that maps blueprint data.</li>
      *     <li><b>ID</b> - Blueprint NBT unique identified used for internal data mapping.</li>
      *     <li><b>RECIPES</b> - NBTTagList key that maps custom blueprint recipes.</li>
      *     <li><b>TOOLTIP</b> - String NBT tag key that maps blueprint data tooltips.</li>
@@ -251,7 +251,7 @@ public class Blueprint extends ItemBase {
                 /*
                  * TODO: Handle cases when the stack already has NBTTagCompound
                  *       The way to go about this would be to copy the stack over
-                 *       in a new inventory slot and asign it the existing NBTTagCompound
+                 *       in a new inventory slot and assign it the existing NBTTagCompound
                  */
             }
             if (BlueprintNBT.getSavedData(stack) == null)
@@ -308,7 +308,7 @@ public class Blueprint extends ItemBase {
 
     /**
      * <p>Load and register blueprint data from itemstack NBTTagCompound.</p>
-     * <i>Note: if data is already registered it will be ovewritten.</i>
+     * <i>Note: if data is already registered it will be overwritten.</i>
      * @param stack itemstack to load the blueprint from
      * @return {@code true} if the blueprint was successfully loaded
      */

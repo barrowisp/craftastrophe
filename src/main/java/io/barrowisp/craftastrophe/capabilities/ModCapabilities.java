@@ -11,7 +11,7 @@ import java.util.concurrent.Callable;
 public class ModCapabilities {
     /*
      *  Mod capability instances will be properly initialized by Forge later on.
-     *  These fileds should not be changed so declare them as package
+     *  These fields should not be changed so declare them as package
      *  private to prevent outside tampering
      */
     @SuppressWarnings("CanBeFinal")
