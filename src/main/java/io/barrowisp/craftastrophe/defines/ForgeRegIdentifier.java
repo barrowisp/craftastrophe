@@ -77,14 +77,14 @@ public @interface ForgeRegIdentifier {
      * <p>This is a regular expression used to validate registry names.</p>
      * It's a mod specific naming convention so it will just throw warnings.
      */
-    Pattern CONVENTION_REGEX = Pattern.compile("^([a-z]+(?:[0-9]*[-_.][a-z0-9]+)*[0-9]*)(\\:)" +
-            "((?:[a-z]+(?:[a-z]*[0-9]*[-_.][a-z0-9]+)*(?:[a-z0-9]*[\\/][a-z0-9]+)?)+[0-9]*)$");
+    Pattern CONVENTION_REGEX = Pattern.compile("^([a-z]+(?:[0-9]*[-_.][a-z0-9]+)*[0-9]*)(:)" +
+            "((?:[a-z]+(?:[a-z]*[0-9]*[-_.][a-z0-9]+)*(?:[a-z0-9]*[/][a-z0-9]+)?)+[0-9]*)$");
 
     /**
      * <p>This is a regular expression used to validate registry names.</p>
      * It's a Minecraft naming rule for resource locations so it will throw errors.
      */
-    Pattern RULE_REGEX = Pattern.compile("^[a-z0-9-_.]+(:)[a-z0-9-_.\\/]+$");
+    Pattern RULE_REGEX = Pattern.compile("^[a-z0-9-_.]+(:)[a-z0-9-_./]+$");
 
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
