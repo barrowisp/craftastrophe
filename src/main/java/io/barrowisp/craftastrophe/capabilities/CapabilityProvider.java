@@ -18,8 +18,8 @@ import javax.annotation.Nullable;
 @Mod.EventBusSubscriber
 public class CapabilityProvider<C extends PlayerCapability> implements ICapabilitySerializable<NBTTagCompound> {
 
-    private Capability<C> capability;
-    private C instance;
+    private final Capability<C> capability;
+    private final C instance;
 
     CapabilityProvider(Capability<C> capability)
     {

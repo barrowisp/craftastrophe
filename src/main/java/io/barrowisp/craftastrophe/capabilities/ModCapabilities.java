@@ -14,6 +14,7 @@ public class ModCapabilities {
      *  These fileds should not be changed so declare them as package
      *  private to prevent outside tampering
      */
+    @SuppressWarnings("CanBeFinal")
     @CapabilityInject(Knowledge.class)
     static Capability<Knowledge> KNOWLEDGE = null;
 

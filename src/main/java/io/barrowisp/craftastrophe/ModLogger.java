@@ -47,8 +47,7 @@ public abstract class ModLogger {
         static boolean init() {
             return (mode = findFromSysProperties()) != null;
         }
-        @Nullable
-        static DebugMode findFromSysProperties() {
+        static @Nullable DebugMode findFromSysProperties() {
 
             String sMode = System.getProperty("debug.mode");
             if (sMode == null) return null;

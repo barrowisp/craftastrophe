@@ -1,13 +1,10 @@
 package io.barrowisp.craftastrophe.items;
 
 import io.barrowisp.craftastrophe.ModLogger;
-import io.barrowisp.craftastrophe.advancement.ModAdvancementTriggers;
 import io.barrowisp.craftastrophe.defines.MethodsNotNull;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
@@ -33,7 +30,7 @@ public class Binder extends ItemBase {
             int knowledge = 3;
             ModAdvancementTriggers.readBlueprint.trigger((EntityPlayerMP) playerIn, knowledge);
         }*/
-        return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
+        return super.onItemRightClick(worldIn, playerIn, handIn);
       //need to add else code that makes the loose Blueprints leave the player's inventory in a retrievable way
     }
 }

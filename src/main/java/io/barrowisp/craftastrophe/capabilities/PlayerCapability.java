@@ -2,7 +2,6 @@ package io.barrowisp.craftastrophe.capabilities;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 
 public interface PlayerCapability extends INBTSerializable<NBTTagCompound> {

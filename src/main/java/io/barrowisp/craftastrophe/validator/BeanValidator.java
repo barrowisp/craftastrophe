@@ -2,6 +2,7 @@ package io.barrowisp.craftastrophe.validator;
 
 import io.barrowisp.craftastrophe.ModLogger;
 import io.barrowisp.craftastrophe.defines.MethodsNotNull;
+
 import io.barrowisp.craftastrophe.util.AnnotationUtils;
 import io.barrowisp.craftastrophe.util.StringUtils;
 

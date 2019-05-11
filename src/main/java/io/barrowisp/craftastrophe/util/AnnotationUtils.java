@@ -2,8 +2,6 @@ package io.barrowisp.craftastrophe.util;
 
 import io.barrowisp.craftastrophe.ModLogger;
 import io.barrowisp.craftastrophe.defines.CustomModAnnotation;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.spi.StandardLevel;
 import io.barrowisp.craftastrophe.defines.MethodsNotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -87,7 +85,7 @@ public class AnnotationUtils {
      * @author Balder@stackoverflow
      * @see <a href="https://stackoverflow.com/a/28118436/7803527">Origin code on Stackoverflow</a>
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "UnusedReturnValue"})
     public static Object changeAnnotationValue(Annotation annotation, String key, Object newValue) {
         Object handler = Proxy.getInvocationHandler(annotation);
         Field f;

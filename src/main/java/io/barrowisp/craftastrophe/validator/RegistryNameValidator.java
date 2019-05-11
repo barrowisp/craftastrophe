@@ -1,9 +1,7 @@
 package io.barrowisp.craftastrophe.validator;
 
-import io.barrowisp.craftastrophe.common.Defines;
 import io.barrowisp.craftastrophe.defines.ForgeRegIdentifier;
 import io.barrowisp.craftastrophe.util.AnnotationUtils;
-import org.apache.logging.log4j.spi.StandardLevel;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
