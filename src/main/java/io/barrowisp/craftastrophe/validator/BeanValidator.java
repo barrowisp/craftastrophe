@@ -165,22 +165,22 @@ public final class BeanValidator {
      */
     private static <T> Constructor getConstructor(Class<T> clazz, Object...params) {
 
-        Class[] constrParams = new Class[params.length];
+        Class[] paramClasses = new Class[params.length];
         for (int i = 0; i < params.length; i++) {
-            constrParams[i] = params[i].getClass();
+            paramClasses[i] = params[i].getClass();
         }
         try {
             /* Use #getDeclaredConstructor method to get our constructor
              * instead of #getConstructor in case the constructor is not visible
              */
-            return clazz.getDeclaredConstructor(constrParams);
+            return clazz.getDeclaredConstructor(paramClasses);
         }
         catch (NoSuchMethodException e) {
             throw new IllegalArgumentException(e);
         }
     }
 
-    private static <T> java.util.Set<ConstraintViolation<T>> validateConstructorParams(Constructor<T> constr, Object...params) {
-        return exeValidator.validateConstructorParameters(constr, params);
+    private static <T> java.util.Set<ConstraintViolation<T>> validateConstructorParams(Constructor<T> c, Object...p) {
+        return exeValidator.validateConstructorParameters(c, p);
     }
 }
