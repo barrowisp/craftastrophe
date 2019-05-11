@@ -3,6 +3,7 @@ package io.barrowisp.craftastrophe.items;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import io.barrowisp.craftastrophe.ModLogger;
 import io.barrowisp.craftastrophe.capabilities.Knowledge;
+import io.barrowisp.craftastrophe.defines.MethodsNotNull;
 import io.barrowisp.craftastrophe.recipes.CustomRecipes;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,12 +20,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@MethodsNotNull
 public class Blueprint extends ItemBase {
 
     /**
@@ -80,14 +81,14 @@ public class Blueprint extends ItemBase {
          * Helper method to add new entries to blueprint recipe registry
          * @see BlueprintData#add(java.util.UUID, List)
          */
-        static void add(@NotNull NBTTagCompound nbt, java.util.List<IRecipe> recipes) {
+        static void add(NBTTagCompound nbt, java.util.List<IRecipe> recipes) {
             add(nbt.getUniqueId(BlueprintNBT.ID), recipes);
         }
         /**
          * Retrieve list of blueprint recipes mapped to given itemstack
          * @return empty list if no data entry for blueprint was found
          */
-        static @NotNull java.util.List<IRecipe> get(ItemStack stack) {
+        static java.util.List<IRecipe> get(ItemStack stack) {
 
             NBTTagCompound nbtTagCompound = BlueprintNBT.getSavedData(stack);
             if (nbtTagCompound != null)
@@ -149,7 +150,7 @@ public class Blueprint extends ItemBase {
          *
          * @return a randomly generated ID
          */
-        static @NotNull java.util.UUID generateUniqueId() {
+        static java.util.UUID generateUniqueId() {
             return java.util.UUID.randomUUID();
         }
 
@@ -177,7 +178,7 @@ public class Blueprint extends ItemBase {
          * @return recipe output item names in a single string ready to be displayed as a tooltip,
          *         or an {@code empty} string if no tooltip {@code NBT} was found in stack {@code NBTTagCompound}.
          */
-        static @NotNull String getTooltip(ItemStack stack) {
+        static String getTooltip(ItemStack stack) {
 
             NBTTagCompound blueprintData = BlueprintNBT.getSavedData(stack);
             return blueprintData != null && blueprintData.hasKey(TOOLTIP)
@@ -282,7 +283,7 @@ public class Blueprint extends ItemBase {
      * @param blueprint blueprint itemstack to load or initialize
      * @param player instance of the player reading the blueprint
      */
-    private static void loadOrRegisterBlueprint(@NotNull ItemStack blueprint, @Nullable EntityPlayerMP player) {
+    private static void loadOrRegisterBlueprint(ItemStack blueprint, @Nullable EntityPlayerMP player) {
 
         ModLogger.debug("Found unregistered blueprint: %s", blueprint.toString());
         if (!loadBlueprint(blueprint) && !initializeBlueprint(blueprint, player))
@@ -328,7 +329,7 @@ public class Blueprint extends ItemBase {
      * <i>Note that this will <b>not get called</b> if the player clicks on a block.</i>
      */
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @NotNull EnumHand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 
         if (playerIn instanceof EntityPlayerMP) {
             /*

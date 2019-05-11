@@ -2,6 +2,7 @@ package io.barrowisp.craftastrophe.items;
 
 import io.barrowisp.craftastrophe.ModLogger;
 import io.barrowisp.craftastrophe.advancement.ModAdvancementTriggers;
+import io.barrowisp.craftastrophe.defines.MethodsNotNull;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -10,12 +11,12 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
+@MethodsNotNull
 public class Binder extends ItemBase {
 
     public Binder(String name) {
         super(name);
     }
-
 
     /**
      * Called when the equipped item is right clicked.

@@ -1,6 +1,7 @@
 package io.barrowisp.craftastrophe.validator;
 
 import io.barrowisp.craftastrophe.ModLogger;
+import io.barrowisp.craftastrophe.defines.MethodsNotNull;
 import io.barrowisp.craftastrophe.util.AnnotationUtils;
 import io.barrowisp.craftastrophe.util.StringUtils;
 
@@ -18,6 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@MethodsNotNull
 public final class BeanValidator {
 
     private static final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();

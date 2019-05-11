@@ -1,5 +1,8 @@
 package io.barrowisp.craftastrophe.util;
 
+import io.barrowisp.craftastrophe.defines.MethodsNotNull;
+
+@MethodsNotNull
 public class StringUtils {
 
     /**

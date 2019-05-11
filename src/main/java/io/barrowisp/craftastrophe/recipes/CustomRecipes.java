@@ -1,11 +1,11 @@
 package io.barrowisp.craftastrophe.recipes;
 
 import io.barrowisp.craftastrophe.ModLogger;
+import io.barrowisp.craftastrophe.defines.MethodsNotNull;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.concurrent.Immutable;
@@ -17,6 +17,7 @@ import java.util.Map;
  * @see RecipeHandler#init()
  */
 @Immutable
+@MethodsNotNull
 public abstract class CustomRecipes {
 
     /**
@@ -24,7 +25,7 @@ public abstract class CustomRecipes {
      * so that they can be easily retrieved by systems like blueprints and others
      * that store recipe references in itemstack {@code NBTTagLists}.
      */
-    private static final @NotNull Map<ResourceLocation, IRecipe> map =
+    private static final Map<ResourceLocation, IRecipe> map =
             java.util.Collections.unmodifiableMap(readCustomRecipes());
 
     /** @return {@code false} if no custom mod recipes were found in Forge registry */
@@ -38,7 +39,7 @@ public abstract class CustomRecipes {
     /**
      * @return array of recipe ouput item names useful for tooltips
      */
-    public static @NotNull String[] getOutputs(java.util.List<IRecipe> recipes) {
+    public static String[] getOutputs(java.util.List<IRecipe> recipes) {
 
         java.util.Set<String> outputs = new java.util.HashSet<>();
         for (IRecipe recipe : recipes) {
@@ -52,7 +53,7 @@ public abstract class CustomRecipes {
      *        <p>The actual number of recipes returned is random.</p>
      * @return a random list of custom recipes
      */
-    public static @NotNull java.util.List<IRecipe> getRandom(int maxAmount) {
+    public static java.util.List<IRecipe> getRandom(int maxAmount) {
 
         ModLogger.debug("Getting random number of custom recipes (1-%d)", maxAmount);
         java.util.List<IRecipe> recipes = new java.util.ArrayList<>();

@@ -4,6 +4,7 @@ import io.barrowisp.craftastrophe.ModLogger;
 import io.barrowisp.craftastrophe.defines.CustomModAnnotation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.spi.StandardLevel;
+import io.barrowisp.craftastrophe.defines.MethodsNotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.validation.constraints.NotEmpty;
@@ -13,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+@MethodsNotNull
 public class AnnotationUtils {
 
     /**
@@ -22,7 +24,7 @@ public class AnnotationUtils {
      *
      * @return {@code empty} map if no attributes were found.
      */
-    public static @NotNull java.util.Map<String, Object> getAttributes(Annotation annotation) {
+    public static java.util.Map<String, Object> getAttributes(Annotation annotation) {
 
         /* Contrary to what one might expect, the elements of an annotation are not attributes,
          * they are actually methods that return the provided value or a default value.
