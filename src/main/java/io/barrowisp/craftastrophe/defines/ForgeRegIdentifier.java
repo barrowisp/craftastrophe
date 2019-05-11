@@ -1,8 +1,8 @@
 package io.barrowisp.craftastrophe.defines;
 
 import io.barrowisp.craftastrophe.validator.RegistryNameValidator;
-import org.apache.logging.log4j.spi.StandardLevel;
 
+import javax.annotation.Nonnull;
 import javax.annotation.meta.TypeQualifierNickname;
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -59,6 +59,7 @@ import java.util.regex.Pattern;
  */
 @Documented
 @CustomModAnnotation
+@TypeQualifierNickname @Nonnull
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE, ElementType.CONSTRUCTOR })
 @Constraint(validatedBy = { RegistryNameValidator.class })
