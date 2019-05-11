@@ -21,7 +21,22 @@ public class StringUtils {
      * </ul>
      */
     public static String smartQuote(Object s) {
-        String value = String.valueOf(s);
-        return s instanceof Number ? value : quote(value, !(s instanceof String));
+
+        return s instanceof Number ? formatQuotient((Number) s) :
+                quote(String.valueOf(s), !(s instanceof String));
+    }
+
+    /**
+     * Drop the quotient remainder if it doesn't have a value.
+     * @return a string representation of the quotient
+     */
+    public static String formatQuotient(Number num) {
+
+        String sNumber = String.valueOf(num);
+        if (num instanceof Double || num instanceof Float) {
+            String[] segments = sNumber.split("\\.");
+            return Integer.valueOf(segments[1]) == 0 ? segments[0] : sNumber;
+        }
+        return sNumber;
     }
 }

@@ -136,9 +136,11 @@ public final class BeanValidator {
              * with an annotation attribute value that holds the same name.
              */
             Matcher matcher = PARSE_REGEX.getKey().matcher(message);
-            while (matcher.find()) {
+            while (matcher.find())
+            {
                 String group = matcher.group(PARSE_REGEX.getValue());
                 Object oReplacement = group.equals("value") ? value : attributes.get(group);
+
                 String sReplacement = StringUtils.smartQuote(oReplacement);
                 message = message.replace(REGEX_KEY + group, sReplacement);
             }
