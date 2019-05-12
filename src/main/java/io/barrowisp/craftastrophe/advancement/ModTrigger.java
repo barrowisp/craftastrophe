@@ -2,8 +2,8 @@ package io.barrowisp.craftastrophe.advancement;
 
 import com.google.gson.JsonObject;
 import io.barrowisp.craftastrophe.Craftastrophe;
-import io.barrowisp.craftastrophe.ModLogger;
-import io.barrowisp.craftastrophe.defines.MethodsNotNull;
+import io.yooksi.forgelib.ModLogger;
+import io.yooksi.commons.define.MethodsNotNull;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.entity.player.EntityPlayerMP;

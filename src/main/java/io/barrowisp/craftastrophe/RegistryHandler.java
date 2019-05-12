@@ -1,6 +1,7 @@
 package io.barrowisp.craftastrophe;
 
 import io.barrowisp.craftastrophe.items.ModItem;
+import io.yooksi.forgelib.ModLogger;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;

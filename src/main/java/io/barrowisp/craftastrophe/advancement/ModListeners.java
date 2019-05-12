@@ -1,6 +1,6 @@
 package io.barrowisp.craftastrophe.advancement;
 
-import io.barrowisp.craftastrophe.ModLogger;
+import io.yooksi.forgelib.ModLogger;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.advancements.PlayerAdvancements;
 

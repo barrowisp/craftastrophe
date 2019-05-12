@@ -3,6 +3,7 @@ package io.barrowisp.craftastrophe;
 import io.barrowisp.craftastrophe.capabilities.ModCapabilities;
 import io.barrowisp.craftastrophe.items.ModItem;
 import io.barrowisp.craftastrophe.recipes.RecipeHandler;
+import io.yooksi.forgelib.ModLogger;
 import net.minecraft.init.Items;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

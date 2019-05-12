@@ -1,7 +1,7 @@
 package io.barrowisp.craftastrophe.items;
 
-import io.barrowisp.craftastrophe.ModLogger;
-import io.barrowisp.craftastrophe.defines.MethodsNotNull;
+import io.yooksi.forgelib.ModLogger;
+import io.yooksi.commons.define.MethodsNotNull;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;

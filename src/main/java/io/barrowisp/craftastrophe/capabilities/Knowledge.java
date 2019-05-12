@@ -1,7 +1,7 @@
 package io.barrowisp.craftastrophe.capabilities;
 
 import io.barrowisp.craftastrophe.Craftastrophe;
-import io.barrowisp.craftastrophe.ModLogger;
+import io.yooksi.forgelib.ModLogger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;

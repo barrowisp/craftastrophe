@@ -1,7 +1,7 @@
 package io.barrowisp.craftastrophe.items;
 
 import io.barrowisp.craftastrophe.Craftastrophe;
-import io.barrowisp.craftastrophe.defines.ForgeRegIdentifier;
+import io.yooksi.forgelib.ForgeRegIdentifier;
 import net.minecraft.item.Item;
 
 class ItemBase extends Item {

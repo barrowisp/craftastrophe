@@ -1,7 +1,7 @@
 package io.barrowisp.craftastrophe.recipes;
 
-import io.barrowisp.craftastrophe.ModLogger;
-import io.barrowisp.craftastrophe.defines.MethodsNotNull;
+import io.yooksi.forgelib.ModLogger;
+import io.yooksi.commons.define.MethodsNotNull;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;

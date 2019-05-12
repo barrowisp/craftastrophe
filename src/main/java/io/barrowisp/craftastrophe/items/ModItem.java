@@ -1,7 +1,7 @@
 package io.barrowisp.craftastrophe.items;
 
-import io.barrowisp.craftastrophe.ModLogger;
-import io.barrowisp.craftastrophe.validator.BeanValidator;
+import io.yooksi.forgelib.ModLogger;
+import io.yooksi.commons.validator.BeanValidator;
 import net.minecraft.item.Item;
 import org.jetbrains.annotations.Contract;
 

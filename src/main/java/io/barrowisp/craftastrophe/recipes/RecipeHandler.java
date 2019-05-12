@@ -1,7 +1,7 @@
 package io.barrowisp.craftastrophe.recipes;
 
 import io.barrowisp.craftastrophe.Craftastrophe;
-import io.barrowisp.craftastrophe.ModLogger;
+import io.yooksi.forgelib.ModLogger;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 public abstract class RecipeHandler {

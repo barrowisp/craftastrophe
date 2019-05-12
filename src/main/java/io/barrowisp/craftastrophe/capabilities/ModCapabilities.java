@@ -1,6 +1,6 @@
 package io.barrowisp.craftastrophe.capabilities;
 
-import io.barrowisp.craftastrophe.ModLogger;
+import io.yooksi.forgelib.ModLogger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;

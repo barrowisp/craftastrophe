@@ -1,9 +1,9 @@
 package io.barrowisp.craftastrophe.items;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import io.barrowisp.craftastrophe.ModLogger;
+import io.yooksi.forgelib.ModLogger;
 import io.barrowisp.craftastrophe.capabilities.Knowledge;
-import io.barrowisp.craftastrophe.defines.MethodsNotNull;
+import io.yooksi.commons.define.MethodsNotNull;
 import io.barrowisp.craftastrophe.recipes.CustomRecipes;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
