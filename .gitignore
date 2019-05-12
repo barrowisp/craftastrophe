@@ -22,6 +22,8 @@ classes
 eclipse
 run
 
+src/main/java/io/yooksi
+
 # exceptions
 !/.idea/runConfigurations/
 !/.idea/dictionaries/
