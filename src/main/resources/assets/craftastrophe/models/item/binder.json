@@ -1,6 +1,7 @@
 {
   "parent": "item/book",
   "textures": {
-    "layer0": "craftastrophe:binder"
+    "layer0": "items/book_normal",
+    "layer1": "craftastrophe:binder_layer"
   }
 }
