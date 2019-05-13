@@ -6,6 +6,7 @@ import io.barrowisp.craftastrophe.recipes.RecipeHandler;
 import net.minecraft.init.Items;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,10 +50,18 @@ public class Craftastrophe {
     }
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event) throws ClassNotFoundException
+    public void init(FMLInitializationEvent event)
     {
         CFLogger.info("Initializing " + NAME + " mod...");
-        RecipeHandler.init();
+
         ModCapabilities.init();
+    }
+
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+
+        CFLogger.info("Post-initializing " + NAME + " mod...");
+
+        RecipeHandler.init();
     }
 }
