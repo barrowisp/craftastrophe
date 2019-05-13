@@ -33,6 +33,10 @@ minecraft {
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
 dependencies {
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
@@ -70,6 +74,9 @@ dependencies {
     // Expression Language 3.0
     // https://mvnrepository.com/artifact/org.glassfish/javax.el
     compile group: 'org.glassfish', name: 'javax.el', version: '3.0.0'
+
+    compile group: 'com.github.yooksi', name: 'commons-vf', version:'-SNAPSHOT'
+    compile group: 'com.github.yooksi', name: 'forgelib', version:'-SNAPSHOT'
 }
 
 processResources {
