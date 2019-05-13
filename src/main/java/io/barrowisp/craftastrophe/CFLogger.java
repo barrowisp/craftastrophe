@@ -25,7 +25,7 @@ public final class CFLogger {
     static void init() {
 
         if (logger == null)
-            logger = ModLogger.create(Craftastrophe.class);
+            logger = ModLogger.create(Craftastrophe.MODID);
         else
             logger.warn("Trying to initialize mod logger more then once");
     }
