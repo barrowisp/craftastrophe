@@ -1,5 +1,6 @@
 package io.barrowisp.craftastrophe.capabilities;
 
+import io.yooksi.commons.aop.AOPProxy;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -8,6 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 /**
  * This class stores the capability implementation instance and
@@ -24,7 +26,12 @@ public class CapabilityProvider<C extends PlayerCapability> implements ICapabili
     CapabilityProvider(Capability<C> capability)
     {
         this.capability = capability;
-        instance = capability.getDefaultInstance();
+        /*
+         * Create an AOP proxy for this capability instance
+         * so we can intercept and validate method invocations
+         */
+        C defaultInstance = Objects.requireNonNull(capability.getDefaultInstance());
+        instance = AOPProxy.createFor(defaultInstance);
     }
 
     @Override

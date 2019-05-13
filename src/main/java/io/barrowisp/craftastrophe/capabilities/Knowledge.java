@@ -2,13 +2,12 @@ package io.barrowisp.craftastrophe.capabilities;
 
 import io.barrowisp.craftastrophe.CFLogger;
 import io.barrowisp.craftastrophe.Craftastrophe;
+import io.yooksi.commons.define.PositiveRange;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import org.jetbrains.annotations.Contract;
 
 /**
  * <p>This capability is an arbitrary representation of players knowledge of the world.</p>
@@ -38,8 +37,8 @@ public interface Knowledge extends PlayerCapability {
 
         private static final int MAX_KNOWLEDGE = 10;
 
-        @Min(0) @Max(MAX_KNOWLEDGE)
-        private int knowledge;
+        @PositiveRange(max = MAX_KNOWLEDGE)
+        private int knowledge = 0;
 
         @Override
         public void dataChanged(EntityPlayerMP player) {
@@ -47,6 +46,7 @@ public interface Knowledge extends PlayerCapability {
         }
 
         @Override
+        @Contract(pure = true)
         public NBTTagCompound serializeNBT() {
 
             CFLogger.debug("Saving player knowledge %d", knowledge);
@@ -63,13 +63,13 @@ public interface Knowledge extends PlayerCapability {
         }
 
         @Override
+        @Contract(pure = true)
         public int get() {
-            increase(-100);
             return knowledge;
         }
 
         @Override
-        public void increase(@Min(value = 0,  message = "The value must be positive") int amount) {
+        public void increase(int amount) {
 
             CFLogger.debug("Increasing player knowledge(%d) for %d", knowledge, amount);
             knowledge += amount;
