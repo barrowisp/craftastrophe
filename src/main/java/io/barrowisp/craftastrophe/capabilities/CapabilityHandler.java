@@ -1,6 +1,6 @@
 package io.barrowisp.craftastrophe.capabilities;
 
-import io.yooksi.forgelib.ModLogger;
+import io.barrowisp.craftastrophe.CFLogger;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -22,7 +22,7 @@ public class CapabilityHandler {
     {
         if(event.getObject() instanceof EntityPlayer)
         {
-            ModLogger.debug("Attaching capability to EntityPlayer.");
+            CFLogger.debug("Attaching capability to EntityPlayer.");
             event.addCapability(Knowledge.RL, Knowledge.PROVIDER);
         }
     }
@@ -47,7 +47,7 @@ public class CapabilityHandler {
          */
         if(event.isWasDeath() && event.getEntityPlayer() instanceof EntityPlayerMP)
         {
-            ModLogger.debug("Cloning %s after player death.)", event.getEntityPlayer().getName());
+            CFLogger.debug("Cloning %s after player death.)", event.getEntityPlayer().getName());
 
             EntityPlayer playerOld = event.getOriginal();
             EntityPlayerMP playerNew = (EntityPlayerMP) event.getEntityPlayer();

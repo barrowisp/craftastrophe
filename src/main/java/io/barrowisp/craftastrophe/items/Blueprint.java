@@ -1,7 +1,7 @@
 package io.barrowisp.craftastrophe.items;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import io.yooksi.forgelib.ModLogger;
+import io.barrowisp.craftastrophe.CFLogger;
 import io.barrowisp.craftastrophe.capabilities.Knowledge;
 import io.yooksi.commons.define.MethodsNotNull;
 import io.barrowisp.craftastrophe.recipes.CustomRecipes;
@@ -72,10 +72,10 @@ public class Blueprint extends ItemBase {
         static void add(java.util.UUID uuid, java.util.List<IRecipe> recipes) {
 
             if (map.size() > MAX_MAP_SIZE) {
-                ModLogger.debug("Clearing blueprint data map");
+                CFLogger.debug("Clearing blueprint data map");
                 map.clear();
             }
-            ModLogger.debug("Storing new BlueprintData map entry: %s", uuid.toString());
+            CFLogger.debug("Storing new BlueprintData map entry: %s", uuid.toString());
             map.put(uuid, java.util.Collections.unmodifiableList(recipes));
         }
         /**
@@ -95,7 +95,7 @@ public class Blueprint extends ItemBase {
             if (nbtTagCompound != null)
             {
                 java.util.UUID uuid = BlueprintNBT.getUniqueID(nbtTagCompound);
-                ModLogger.debug("Retrieving BlueprintData entry: %s", uuid.toString());
+                CFLogger.debug("Retrieving BlueprintData entry: %s", uuid.toString());
 
                 java.util.List<IRecipe> recipes = map.get(uuid);
                 return recipes != null ? recipes : new java.util.ArrayList<>();
@@ -221,15 +221,15 @@ public class Blueprint extends ItemBase {
             throw new IllegalArgumentException("Unable to register blueprint, invalid ItemStack argument!");
         }
         else if (!isUnregistered(stack)) {
-            ModLogger.warn("Trying to register same blueprint twice");
+            CFLogger.warn("Trying to register same blueprint twice");
         }
         /* Register blueprint only if we found some custom recipes in Forge registry */
         else if (CustomRecipes.exist())
         {
-            ModLogger.debug("Registering new blueprint entry...");
+            CFLogger.debug("Registering new blueprint entry...");
             if(!stack.hasTagCompound())
             {
-                ModLogger.debug("Creating new NBTTagCompound for blueprint");
+                CFLogger.debug("Creating new NBTTagCompound for blueprint");
                 /*
                  *  If the stack has multiple items don't assign recipes to the whole stack.
                  *  We always want to register ONLY stacks with a count of 1
@@ -280,7 +280,7 @@ public class Blueprint extends ItemBase {
                 BlueprintNBT.saveData(stack, blueprintData);
                 return true;
             }
-            else ModLogger.warn("Trying to register blueprint with existing BlueprintNBT data");
+            else CFLogger.warn("Trying to register blueprint with existing BlueprintNBT data");
         }
         return false;
     }
@@ -301,9 +301,9 @@ public class Blueprint extends ItemBase {
      */
     private static void loadOrRegisterBlueprint(ItemStack blueprint, EntityPlayerMP player) {
 
-        ModLogger.debug("Found unregistered blueprint: %s", blueprint.toString());
+        CFLogger.debug("Found unregistered blueprint: %s", blueprint.toString());
         if (!loadBlueprint(blueprint) && !initializeBlueprint(blueprint, player))
-            ModLogger.error("Unable to load or register blueprint data");
+            CFLogger.error("Unable to load or register blueprint data");
     }
 
     /**
@@ -314,12 +314,12 @@ public class Blueprint extends ItemBase {
      */
     private static boolean loadBlueprint(ItemStack stack) {
 
-        ModLogger.debug("Checking if blueprint has saved recipe entries...");
+        CFLogger.debug("Checking if blueprint has saved recipe entries...");
         NBTTagCompound blueprintData = BlueprintNBT.getSavedData(stack);
 
         if (blueprintData != null)
         {
-            ModLogger.debug("Loading custom recipes for blueprint");
+            CFLogger.debug("Loading custom recipes for blueprint");
             NBTTagList recipeList = blueprintData.getTagList(BlueprintNBT.RECIPES, BlueprintNBT.listType);
             java.util.List<IRecipe> customRecipes = new java.util.ArrayList<>();
 
@@ -332,7 +332,7 @@ public class Blueprint extends ItemBase {
                 customRecipes.add(CustomRecipes.getRecipe(new ResourceLocation(sLocation)));
             }
             if (!customRecipes.isEmpty()) {
-                ModLogger.debug("Loaded blueprint recipes from NBT: %s", recipeList);
+                CFLogger.debug("Loaded blueprint recipes from NBT: %s", recipeList);
                 BlueprintData.add(blueprintData, customRecipes);
                 return true;
             }
@@ -356,7 +356,7 @@ public class Blueprint extends ItemBase {
                 EntityPlayerMP player = (EntityPlayerMP) playerIn;
                 ItemStack blueprint = player.getHeldItem(handIn);
 
-                ModLogger.debug("%s is trying to read a blueprint", player.getName());
+                CFLogger.debug("%s is trying to read a blueprint", player.getName());
                 /*
                  * Try to find blueprint data stored in an internal map
                  * before trying to construct them from NBT
@@ -369,24 +369,24 @@ public class Blueprint extends ItemBase {
 
                 if (!blueprintRecipes.isEmpty())
                 {
-                    ModLogger.debug("Found %d potential blueprint recipes to learn", blueprintRecipes.size());
+                    CFLogger.debug("Found %d potential blueprint recipes to learn", blueprintRecipes.size());
                     for (IRecipe recipe : blueprintRecipes) {
                         if (!player.getRecipeBook().isUnlocked(recipe))
                         {
-                            ModLogger.debug("Going to learn recipe %s", recipe.getRecipeOutput().getDisplayName());
+                            CFLogger.debug("Going to learn recipe %s", recipe.getRecipeOutput().getDisplayName());
                             recipesToLearn.add(recipe);
                         }
-                        else ModLogger.debug("Skipping recipe %s, already know that one", recipe.getRecipeOutput().getDisplayName());
+                        else CFLogger.debug("Skipping recipe %s, already know that one", recipe.getRecipeOutput().getDisplayName());
                     }
                     if (!recipesToLearn.isEmpty())
                     {
                         playerIn.unlockRecipes(recipesToLearn);
                         Knowledge.increasePlayerKnowledge(playerIn, 1);
-                        ModLogger.debug("%s learned %d new recipes from blueprint", player.getName(), recipesToLearn.size());
+                        CFLogger.debug("%s learned %d new recipes from blueprint", player.getName(), recipesToLearn.size());
                     }
-                    else ModLogger.debug("Blueprint doesn't contain any new recipes to learn");
+                    else CFLogger.debug("Blueprint doesn't contain any new recipes to learn");
                 }
-                else ModLogger.error("Blueprint recipe list is empty, something went wrong");
+                else CFLogger.error("Blueprint recipe list is empty, something went wrong");
             }
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);

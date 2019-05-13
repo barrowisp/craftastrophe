@@ -3,7 +3,6 @@ package io.barrowisp.craftastrophe;
 import io.barrowisp.craftastrophe.capabilities.ModCapabilities;
 import io.barrowisp.craftastrophe.items.ModItem;
 import io.barrowisp.craftastrophe.recipes.RecipeHandler;
-import io.yooksi.forgelib.ModLogger;
 import net.minecraft.init.Items;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -41,9 +40,9 @@ public class Craftastrophe {
         /* Make sure we initialize the logging system before doing
          * anything else that might produce logs
          */
-        ModLogger.init();
+        CFLogger.init();
 
-        ModLogger.info("Pre-initializing " + NAME + " mod...");
+        CFLogger.info("Pre-initializing " + NAME + " mod...");
 
         ModItem.init();
 //        ModAdvancementTriggers.init();
@@ -52,7 +51,7 @@ public class Craftastrophe {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) throws ClassNotFoundException
     {
-        ModLogger.info("Initializing " + NAME + " mod...");
+        CFLogger.info("Initializing " + NAME + " mod...");
         RecipeHandler.init();
         ModCapabilities.init();
     }

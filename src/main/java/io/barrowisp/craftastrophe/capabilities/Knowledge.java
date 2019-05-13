@@ -1,7 +1,7 @@
 package io.barrowisp.craftastrophe.capabilities;
 
+import io.barrowisp.craftastrophe.CFLogger;
 import io.barrowisp.craftastrophe.Craftastrophe;
-import io.yooksi.forgelib.ModLogger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -49,7 +49,7 @@ public interface Knowledge extends PlayerCapability {
         @Override
         public NBTTagCompound serializeNBT() {
 
-            ModLogger.debug("Saving player knowledge %d", knowledge);
+            CFLogger.debug("Saving player knowledge %d", knowledge);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setInteger("knowledge", knowledge);
             return nbt;
@@ -59,7 +59,7 @@ public interface Knowledge extends PlayerCapability {
         public void deserializeNBT(NBTTagCompound nbt) {
 
             knowledge = nbt.getInteger("knowledge");
-            ModLogger.debug("Loaded player knowledge %d", knowledge);
+            CFLogger.debug("Loaded player knowledge %d", knowledge);
         }
 
         @Override
@@ -71,7 +71,7 @@ public interface Knowledge extends PlayerCapability {
         @Override
         public void increase(@Min(value = 0,  message = "The value must be positive") int amount) {
 
-            ModLogger.debug("Increasing player knowledge(%d) for %d", knowledge, amount);
+            CFLogger.debug("Increasing player knowledge(%d) for %d", knowledge, amount);
             knowledge += amount;
             if (knowledge > MAX_KNOWLEDGE) {
                 knowledge = MAX_KNOWLEDGE;

@@ -1,6 +1,6 @@
 package io.barrowisp.craftastrophe.recipes;
 
-import io.yooksi.forgelib.ModLogger;
+import io.barrowisp.craftastrophe.CFLogger;
 import io.yooksi.commons.define.MethodsNotNull;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
@@ -55,7 +55,7 @@ public abstract class CustomRecipes {
      */
     public static java.util.List<IRecipe> getRandom(int maxAmount) {
 
-        ModLogger.debug("Getting random number of custom recipes (1-%d)", maxAmount);
+        CFLogger.debug("Getting random number of custom recipes (1-%d)", maxAmount);
         java.util.List<IRecipe> recipes = new java.util.ArrayList<>();
         /* No custom mod recipes found in Forge registry */
         if (map.isEmpty()) return recipes;
@@ -78,7 +78,7 @@ public abstract class CustomRecipes {
         IForgeRegistry<IRecipe> gameRecipes = ForgeRegistries.RECIPES;
         Map<ResourceLocation, IRecipe> modRecipes = new java.util.Hashtable<>();
 
-        ModLogger.debug("Iterating through game recipes (size: %d)", gameRecipes.getEntries().size());
+        CFLogger.debug("Iterating through game recipes (size: %d)", gameRecipes.getEntries().size());
         for (IRecipe recipe : gameRecipes)
         {
             ResourceLocation location = recipe.getRegistryName();
@@ -88,7 +88,7 @@ public abstract class CustomRecipes {
                 modRecipes.put(location, recipe);
             }
         }
-        ModLogger.debug("Found %d custom mod recipes", modRecipes.size());
+        CFLogger.debug("Found %d custom mod recipes", modRecipes.size());
         return modRecipes;
     }
 }

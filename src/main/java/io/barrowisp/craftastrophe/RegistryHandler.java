@@ -1,7 +1,6 @@
 package io.barrowisp.craftastrophe;
 
 import io.barrowisp.craftastrophe.items.ModItem;
-import io.yooksi.forgelib.ModLogger;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -19,7 +18,7 @@ public class RegistryHandler {
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        ModLogger.info("Registering mod items...");
+        CFLogger.info("Registering mod items...");
         final IForgeRegistry<Item> registry = event.getRegistry();
         for (ModItem item : ModItem.values())
             registry.register(item.get());
@@ -29,7 +28,7 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event)
     {
-        ModLogger.info("Registering asset models...");
+        CFLogger.info("Registering asset models...");
         for (ModItem item : ModItem.values())
             registerModel(item.get());
     }

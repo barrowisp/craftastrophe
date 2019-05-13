@@ -1,7 +1,7 @@
 package io.barrowisp.craftastrophe.recipes;
 
+import io.barrowisp.craftastrophe.CFLogger;
 import io.barrowisp.craftastrophe.Craftastrophe;
-import io.yooksi.forgelib.ModLogger;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 public abstract class RecipeHandler {
@@ -12,7 +12,7 @@ public abstract class RecipeHandler {
      * @throws ClassNotFoundException if the {@code CustomRecipes} class was not found
      */
     public static void init() throws ClassNotFoundException {
-        ModLogger.debug("Loading CustomRecipes class");
+        CFLogger.debug("Loading CustomRecipes class");
         Class.forName(CustomRecipes.class.getName());
     }
 }

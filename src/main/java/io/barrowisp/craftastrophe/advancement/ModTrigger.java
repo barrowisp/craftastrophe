@@ -1,8 +1,8 @@
 package io.barrowisp.craftastrophe.advancement;
 
 import com.google.gson.JsonObject;
+import io.barrowisp.craftastrophe.CFLogger;
 import io.barrowisp.craftastrophe.Craftastrophe;
-import io.yooksi.forgelib.ModLogger;
 import io.yooksi.commons.define.MethodsNotNull;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.advancements.PlayerAdvancements;
@@ -90,7 +90,7 @@ public abstract class ModTrigger<I extends ModCriterionInstance<O>, O> implement
     protected @Nullable String getTriggerConditionFrom(JsonObject json)
     {
         String trigger = json.has(condition) ? JsonUtils.getString(json, condition) : null;
-        ModLogger.debug("Reading trigger condition " + json.toString() + " from json file");
+        CFLogger.debug("Reading trigger condition " + json.toString() + " from json file");
         return trigger;
     }
 }

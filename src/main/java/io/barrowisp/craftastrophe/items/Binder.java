@@ -1,6 +1,6 @@
 package io.barrowisp.craftastrophe.items;
 
-import io.yooksi.forgelib.ModLogger;
+import io.barrowisp.craftastrophe.CFLogger;
 import io.yooksi.commons.define.MethodsNotNull;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,7 +19,7 @@ public class Binder extends ItemBase {
      * Called when the equipped item is right clicked.
      */
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        ModLogger.debug("Stashing unintelligible blueprints...");
+        CFLogger.debug("Stashing unintelligible blueprints...");
         /*
          *  The following lines are an attempt to separate foundational recipes from more-advanced recipes.
          *  If any of the Blueprints in the player's inventory are of an appropriate tier,

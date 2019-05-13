@@ -1,6 +1,6 @@
 package io.barrowisp.craftastrophe.capabilities;
 
-import io.yooksi.forgelib.ModLogger;
+import io.barrowisp.craftastrophe.CFLogger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
@@ -23,7 +23,7 @@ public class ModCapabilities {
      */
     public static void init() {
 
-        ModLogger.debug("Initializing mod capabilities.");
+        CFLogger.debug("Initializing mod capabilities.");
         register(Knowledge.class, Knowledge.Impl::new);
     }
     private static <T extends PlayerCapability> void register(Class<T> type, Callable<? extends T> factory) {
@@ -34,7 +34,7 @@ public class ModCapabilities {
 
         Knowledge knowledge = player.getCapability(ModCapabilities.KNOWLEDGE, null);
         if (knowledge == null) {
-            ModLogger.error("Unable to find Knowledge player capability.");
+            CFLogger.error("Unable to find Knowledge player capability.");
         }
         return knowledge;
     }
