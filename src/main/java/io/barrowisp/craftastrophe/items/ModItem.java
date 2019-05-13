@@ -20,7 +20,7 @@ public enum ModItem {
     private final ItemBase instance;
 
     ModItem(Class<? extends ItemBase> itemClass, String id) {
-        instance = BeanValidator.constructItem(ItemBase.class, itemClass, id);
+        instance = BeanValidator.constructChild(ItemBase.class, itemClass, id);
     }
 
     @Contract(pure = true)
