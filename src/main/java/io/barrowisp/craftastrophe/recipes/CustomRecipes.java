@@ -82,7 +82,7 @@ public abstract class CustomRecipes {
         for (IRecipe recipe : gameRecipes)
         {
             ResourceLocation location = recipe.getRegistryName();
-            String domain = location != null ? location.getResourceDomain() : "";
+            String domain = location != null ? location.getNamespace() : "";
 
             if (!domain.isEmpty() && !domain.equals("minecraft")) {
                 modRecipes.put(location, recipe);

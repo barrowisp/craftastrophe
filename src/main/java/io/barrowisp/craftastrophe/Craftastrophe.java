@@ -29,11 +29,11 @@ public class Craftastrophe {
     public static final net.minecraft.creativetab.CreativeTabs tabCraftastrophe =
             (new net.minecraft.creativetab.CreativeTabs("tabCraftastrophe") {
 
-        @Override
-        public @NotNull net.minecraft.item.ItemStack getTabIconItem() {
-            return new net.minecraft.item.ItemStack(Items.WRITABLE_BOOK);
-        }
-    });
+            @Override @NotNull
+            public net.minecraft.item.ItemStack createIcon() {
+                return new net.minecraft.item.ItemStack(Items.WRITABLE_BOOK);
+            }
+        });
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
