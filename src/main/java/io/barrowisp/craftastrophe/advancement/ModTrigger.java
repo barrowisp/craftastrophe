@@ -26,7 +26,7 @@ public abstract class ModTrigger<I extends ModCriterionInstance<O>, O> implement
      */
     public ModTrigger(String trigger, String condition)
     {
-        ID = new ResourceLocation(Craftastrophe.MODID, trigger);
+        ID = new ResourceLocation(Craftastrophe.MOD_ID, trigger);
         this.condition = condition;
     }
 

@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Contract;
  */
 public interface Knowledge extends PlayerCapability {
 
-    ResourceLocation RL = new ResourceLocation(Craftastrophe.MODID, "knowledge");
+    ResourceLocation RL = new ResourceLocation(Craftastrophe.MOD_ID, "knowledge");
     CapabilityProvider<Knowledge> PROVIDER = new CapabilityProvider<>(ModCapabilities.KNOWLEDGE);
 
     static void increasePlayerKnowledge(EntityPlayer player, int amount) {
