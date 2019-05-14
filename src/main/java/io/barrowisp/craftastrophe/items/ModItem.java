@@ -1,26 +1,26 @@
 package io.barrowisp.craftastrophe.items;
 
 import io.barrowisp.craftastrophe.CFLogger;
-import io.yooksi.commons.validator.BeanValidator;
+import io.yooksi.forgelib.ItemBase;
 import net.minecraft.item.Item;
 import org.jetbrains.annotations.Contract;
 
 public enum ModItem {
 
-    BLUEPRINT(Blueprint.class, "craftastrophe:blueprint"),
+    BLUEPRINT(Blueprint.class, "blueprint"),
 
     /**
      * Attempting to add another custom Item,
      * as an additional 'constant' in the enum ModItem,
      * so changed the semicolon ; at the end of the BLUEPRINT constant to a comma ,
      */
-    BINDER(Binder.class, "craftastrophe:binder");
+    BINDER(Binder.class, "binder");
 
     private static java.util.List<Item> ITEMS = new java.util.ArrayList<>();
     private final ItemBase instance;
 
-    ModItem(Class<? extends ItemBase> itemClass, String id) {
-        instance = BeanValidator.constructChild(ItemBase.class, itemClass, id);
+    ModItem(Class<? extends ItemBase> itemClass, String name) {
+        instance = ItemBase.construct(itemClass, name);
     }
 
     @Contract(pure = true)

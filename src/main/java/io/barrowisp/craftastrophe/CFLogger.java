@@ -32,7 +32,7 @@ public final class CFLogger {
 
     @Contract(pure = true)
     public static Logger get() {
-        return logger.get();
+        return logger.getLogger();
     }
     /*
      * Short-hand methods to print logs to console.

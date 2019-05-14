@@ -2,6 +2,7 @@ package io.barrowisp.craftastrophe.items;
 
 import io.barrowisp.craftastrophe.CFLogger;
 import io.yooksi.commons.define.MethodsNotNull;
+import io.yooksi.forgelib.ItemBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;

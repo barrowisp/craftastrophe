@@ -5,6 +5,7 @@ import io.barrowisp.craftastrophe.CFLogger;
 import io.barrowisp.craftastrophe.capabilities.Knowledge;
 import io.yooksi.commons.define.MethodsNotNull;
 import io.barrowisp.craftastrophe.recipes.CustomRecipes;
+import io.yooksi.forgelib.ItemBase;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
