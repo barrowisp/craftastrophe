@@ -3,37 +3,40 @@ package io.barrowisp.craftastrophe;
 import io.barrowisp.craftastrophe.capabilities.ModCapabilities;
 import io.barrowisp.craftastrophe.items.ModItem;
 import io.barrowisp.craftastrophe.recipes.RecipeHandler;
-import net.minecraft.init.Items;
+import io.yooksi.commons.aop.AOPProxy;
+import io.yooksi.forgelib.ForgeMod;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.jetbrains.annotations.NotNull;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @SuppressWarnings("unused")
-public class Craftastrophe {
 @Mod(modid = Craftastrophe.MOD_ID, name = Craftastrophe.NAME, version = Craftastrophe.VERSION)
+public class Craftastrophe extends ForgeMod {
 
-    @Mod.Instance
-    public static Craftastrophe instance;
+    private static ForgeMod instance;
 
     public static final String MOD_ID = "craftastrophe";
     public static final String NAME = "Craftastrophe";
     public static final String VERSION = "0.1";
 
-    /**
-     *  Create a new creative tab to be displayed in-game for our mod.
-     *  By overriding {@code getTabIconItem} we are able to return our own
-     *  item stack which the game will use to show a tab picture.
-     */
-    public static final net.minecraft.creativetab.CreativeTabs tabCraftastrophe =
-            (new net.minecraft.creativetab.CreativeTabs("tabCraftastrophe") {
+    public Craftastrophe() {
+        super("tabCraftastrophe", net.minecraft.init.Items.WRITABLE_BOOK);
+        instance = AOPProxy.createFor(this);
+    }
 
-            @Override @NotNull
-            public net.minecraft.item.ItemStack createIcon() {
-                return new net.minecraft.item.ItemStack(Items.WRITABLE_BOOK);
-            }
-        });
+    public @NotEmpty String getModId() {
+        return MOD_ID;
+    }
+    /**
+     * @return a singleton instance of this mod
+     */
+    public static @NotNull ForgeMod get() {
+        return instance;
+    }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
