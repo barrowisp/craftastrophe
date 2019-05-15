@@ -1,6 +1,7 @@
 package io.barrowisp.craftastrophe.items;
 
 import io.barrowisp.craftastrophe.CFLogger;
+import io.barrowisp.craftastrophe.Craftastrophe;
 import io.yooksi.forgelib.ItemBase;
 import net.minecraft.item.Item;
 import org.jetbrains.annotations.Contract;
@@ -20,7 +21,7 @@ public enum ModItem {
     private final ItemBase instance;
 
     ModItem(Class<? extends ItemBase> itemClass, String name) {
-        instance = ItemBase.construct(itemClass, name);
+        instance = ItemBase.construct(itemClass, name, Craftastrophe.get());
     }
 
     @Contract(pure = true)
@@ -36,6 +37,7 @@ public enum ModItem {
      * Initialize all mod items and store them in a list.
      */
     public static void init() {
+
         CFLogger.debug("Initializing mod items...");
         for (ModItem i : ModItem.values()) ModItem.ITEMS.add(i.instance);
         ModItem.ITEMS = java.util.Collections.unmodifiableList(ModItem.ITEMS);

@@ -12,8 +12,8 @@ import net.minecraft.world.World;
 @MethodsNotNull
 public class Binder extends ItemBase {
 
-    public Binder(String name) {
-        super(name);
+    public Binder(String name, io.yooksi.forgelib.ForgeMod mod) {
+        super(name, mod);
     }
 
     /**

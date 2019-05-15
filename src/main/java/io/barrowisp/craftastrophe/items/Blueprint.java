@@ -112,9 +112,10 @@ public class Blueprint extends ItemBase {
     /**
      * Construct and register this mod item with Forge
      * @param name registry and unlocalized item name
+     * @param mod instance of the mod creating the item
      */
-    public Blueprint(String name) {
-        super(name);
+    public Blueprint(String name, io.yooksi.forgelib.ForgeMod mod) {
+        super(name, mod);
     }
 
     /**
